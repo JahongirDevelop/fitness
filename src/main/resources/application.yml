@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/fitness
-    username: postgres
+    url: jdbc:postgresql://localhost:5432/go2uz_db
+    username: go2uz_user
     password: 1
     driver-class-name: org.postgresql.Driver
   jpa:
