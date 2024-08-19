@@ -10,7 +10,6 @@ import lombok.*;
 @Setter
 @Builder
 public class News extends BaseEntity {
-
     private String title;
     private String subTitle;
     private String description;
@@ -21,4 +20,5 @@ public class News extends BaseEntity {
 
     private String image;
 }
+
 
