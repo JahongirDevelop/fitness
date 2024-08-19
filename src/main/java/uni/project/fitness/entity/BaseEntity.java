@@ -16,7 +16,7 @@ public class BaseEntity {
     @CreationTimestamp
     protected LocalDateTime createdDate;
 
-    @UpdateTimestamp
-    protected LocalDateTime updatedDate;
+//    @UpdateTimestamp
+//    protected LocalDateTime updatedDate;
 
 }
