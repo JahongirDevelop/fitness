@@ -23,8 +23,6 @@ public class UserEntity extends BaseEntity implements UserDetails {
     private String phoneNumber;
     private String email;
     private String password;
-
-
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
@@ -37,9 +35,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<SimpleGrantedAuthority> authorities =
-                new HashSet<>(Set.of(new SimpleGrantedAuthority("ROLE_" + role.name())));
-        return authorities;
+        return new HashSet<>(Set.of(new SimpleGrantedAuthority("ROLE_" + role.name())));
     }
 
     @Override
@@ -54,21 +50,21 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return false;
     }
 }
