@@ -1,7 +1,10 @@
+server:
+  port: 5173
+
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/go2uz_db
-    username: go2uz_user
+    url: jdbc:postgresql://localhost:5432/fitness
+    username: postgres
     password: 1
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -29,7 +32,7 @@ spring:
 springdoc:
   api-docs:
     enabled: true
-    path: /api-docs
+    path: /v3/api-docs
   swagger-ui:
     enabled: true
     path: /swagger
@@ -38,7 +41,12 @@ springdoc:
     disable-swagger-default-url: true
     doc-expansion: none
 
+
+
 jwt:
   access-expiry: 86400000  # a day in milliseconds
   refresh-expiry: 604800000  # 7 days in milliseconds
   secret: gjhkoiutrefdsavzbxcnmktjyhretgwedfvbnjkrjyerhsfg
+
+
+

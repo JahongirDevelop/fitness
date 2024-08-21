@@ -1,15 +1,13 @@
 package uni.project.fitness.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.CategoryRequestDTO;
 import uni.project.fitness.dto.response.CategoryResponseDTO;
-import uni.project.fitness.exception.DataNotFoundException;
 //import uni.project.fitness.servise.CategoryService;
 import uni.project.fitness.servise.CategoryService;
-import uni.project.fitness.servise.MyService;
+
 import java.util.List;
 import java.util.UUID;
 
