@@ -7,3 +7,4 @@ FROM openjdk:17
 WORKDIR /app
 COPY target/fitness-0.0.1-SNAPSHOT.jar fitness.jar
 ENTRYPOINT ["java", "-jar", "fitness.jar"]
+
