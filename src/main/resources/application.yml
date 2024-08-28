@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/fitness
+    url: jdbc:postgresql://localhost:5433/fitness
     username: fitness_user
     password: 1
     driver-class-name: org.postgresql.Driver

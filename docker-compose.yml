@@ -41,5 +41,5 @@ services:
       POSTGRES_PASSWORD: 1
       POSTGRES_DB: fitness
     ports:
-      - "5432:5432"
+      - "5433:5432"
 
