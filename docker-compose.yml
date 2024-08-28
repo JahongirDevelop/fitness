@@ -37,7 +37,7 @@ services:
   db:
     image: postgres:13
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: fitness_user
       POSTGRES_PASSWORD: 1
       POSTGRES_DB: fitness
     ports:
