@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/fitness
-    username: fitness_user
-    password: 1
+    url: jdbc:postgresql://${DB_IP:194.62.105.120}:${DB_PORT:5433}/${DB_NAME:fitness}
+    username: ${DB_USERNAME:fitness_user}
+    password: ${DB_PASSWORD:1}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
