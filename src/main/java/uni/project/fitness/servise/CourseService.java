@@ -135,4 +135,14 @@ public class CourseService {
                 .name(category.getName())
                 .build();
     }
+
+    public List<CourseResponseDTO> getCoursesByCategory(UUID categoryId) {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new DataNotFoundException("Category not found with id: " + categoryId));
+        List<CourseResponseDTO> responseDTOList = new ArrayList<>();
+        for (Course course : courseRepository.findByCategory(category)) {
+            responseDTOList.add(convertToResponseDTO(course));
+        }
+        return responseDTOList;
+    }
 }
