@@ -1,31 +1,30 @@
-version: '3.8'
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: fitness
+#    image: ##
     ports:
       - "8080:8080"
     environment:
       DB_IP: db
-      DB_PORT: 5432
       DB_NAME: fitness
-      DB_USERNAME: postgres
       DB_PASSWORD: 1
     depends_on:
       - db
-
   db:
-    image: postgres:14  # Use a specific version for consistency
+    image: postgres
     ports:
-      - "5433:5432"  # Maps host port 5433 to container port 5432
+      - "5433:5432"
     environment:
-      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1
+      POSTGRES_USERNAME: postgres
       POSTGRES_DB: fitness
     volumes:
       - pg_data:/var/lib/postgresql/data
-
 volumes:
   pg_data:
+
+
+
+
