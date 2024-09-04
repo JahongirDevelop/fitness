@@ -5,8 +5,8 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_IP:194.62.105.120}:${DB_PORT:5433}/${DB_NAME:fitness_database}
-    username: ${DB_USERNAME:fitnessUser}
+    url: jdbc:postgresql://${DB_IP:localhost}:${DB_PORT:5432}/${DB_NAME:fitness_database}
+    username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:1}
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -16,6 +16,18 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: coursemanagmentt@gmail.com
+    password: rmtdqcbpmqabptsc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 
 
