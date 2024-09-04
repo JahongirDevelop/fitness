@@ -152,4 +152,14 @@ public class TrainingService {
                         : new ArrayList<>()) // Handle case where trainings might be null
                 .build();
     }
+
+    public List<TrainingResponseDTO> getTrainingsByCourse(UUID courseId) {
+            Course course = courseRepository.findById(courseId)
+                    .orElseThrow(() -> new DataNotFoundException("Course not found with id: " + courseId));
+        List<TrainingResponseDTO> responseDTOList = new ArrayList<>();
+        for (Training training : trainingRepository.findByCourse(course)) {
+            responseDTOList.add(convertToResponseDTO(training));
+        }
+        return responseDTOList;
+    }
 }
