@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.CourseRequestDTO;
 import uni.project.fitness.dto.response.CourseResponseDTO;
+import uni.project.fitness.entity.Course;
 import uni.project.fitness.servise.CourseService;
 
 import java.util.List;
@@ -40,5 +41,10 @@ public class CourseController {
     @GetMapping
     public ResponseEntity<List<CourseResponseDTO>> getAllCourses() {
         return ResponseEntity.ok(courseService.getAllCourses());
+    }
+
+    @GetMapping("/get-all-by-category/{categoryId}")
+    public ResponseEntity<List<CourseResponseDTO>> getCoursesByCategory(@PathVariable UUID categoryId) {
+        return ResponseEntity.ok(courseService.getCoursesByCategory(categoryId));
     }
 }
