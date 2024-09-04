@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8083
   forward-headers-strategy: native
 
 
@@ -16,6 +16,18 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: coursemanagmentt@gmail.com
+    password: rmtdqcbpmqabptsc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 
 
