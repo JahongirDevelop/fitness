@@ -10,6 +10,7 @@ services:
       DB_IP: db
       DB_NAME: fitnessdatabase
       DB_PASSWORD: 1
+      DB_PORT: 5432 # Set the correct port for internal communication
     depends_on:
       - db
   db:
