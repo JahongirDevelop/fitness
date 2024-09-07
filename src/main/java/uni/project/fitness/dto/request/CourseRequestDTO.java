@@ -1,10 +1,10 @@
 package uni.project.fitness.dto.request;
 
 import lombok.*;
+import uni.project.fitness.entity.icons.IconDescription;
 
 import java.util.List;
 import java.util.UUID;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,13 +15,10 @@ public class CourseRequestDTO {
     private String subTitle;
     private String description;
     private String image;
-//    private List<UUID> teacherIds; // List of Teacher IDs
     private String trailerVideo;
     private Double price;
-//    private List<UUID> trainingIds; // List of Training IDs
-    private String whatToExpects;
+    private List<IconDescription> whatToExpects; // Use IconDescription enum
     private String purpose;
-    private List<String> icons;
     private List<String> results;
-    private UUID categoryId; // Reference to Category
+    private UUID categoryId;
 }
