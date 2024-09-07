@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import uni.project.fitness.entity.icons.IconDescription;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,13 +21,11 @@ public class CourseResponseDTO {
     private String subTitle;
     private String description;
     private String image;
-//    private List<TeacherResponseDTO> teachers;
     private String trailerVideo;
     private Double price;
     private List<TrainingDTO> trainings;
-    private String whatToExpects;
+    private List<IconDescription> whatToExpects; // Use IconDescription enum
     private String purpose;
-    private List<String> icons;
     private List<String> results;
-    private CategoryDTO category; // Include Category details
+    private CategoryDTO category;
 }
