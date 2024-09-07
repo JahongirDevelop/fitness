@@ -13,8 +13,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/news")
 @RequiredArgsConstructor
-//@CrossOrigin(origins = "https://4311-93-188-80-101.ngrok-free.app")
-@CrossOrigin(origins = "http://127.0.0.1:4040 ") // Replace with your frontend's URL
 
 public class NewsController {
     private final NewsService newsService;
