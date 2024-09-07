@@ -27,7 +27,6 @@ public class CourseService {
     private final CategoryRepository categoryRepository;
     private final TeacherRepository teacherRepository;
     private final TrainingRepository trainingRepository;
-
     public CourseResponseDTO createCourse(CourseRequestDTO requestDTO) {
         Course course = Course.builder()
                 .title(requestDTO.getTitle())
@@ -36,9 +35,9 @@ public class CourseService {
                 .image(requestDTO.getImage())
                 .trailerVideo(requestDTO.getTrailerVideo())
                 .price(requestDTO.getPrice())
-                .whatToExpects(requestDTO.getWhatToExpects())
+                .whatToExpects(requestDTO.getWhatToExpects()) // Use IconDescription
                 .purpose(requestDTO.getPurpose())
-                .icons(requestDTO.getIcons())
+//                .icons(requestDTO.getIcons())
                 .results(requestDTO.getResults())
                 .category(categoryRepository.findById(requestDTO.getCategoryId()).orElseThrow(() -> new DataNotFoundException("Category not found")))
                 .build();
@@ -54,14 +53,15 @@ public class CourseService {
         course.setImage(requestDTO.getImage());
         course.setTrailerVideo(requestDTO.getTrailerVideo());
         course.setPrice(requestDTO.getPrice());
-        course.setWhatToExpects(requestDTO.getWhatToExpects());
+        course.setWhatToExpects(requestDTO.getWhatToExpects()); // Use IconDescription
         course.setPurpose(requestDTO.getPurpose());
-        course.setIcons(requestDTO.getIcons());
+//        course.setIcons(requestDTO.getIcons());
         course.setResults(requestDTO.getResults());
         course.setCategory(categoryRepository.findById(requestDTO.getCategoryId()).orElseThrow(() -> new DataNotFoundException("Category not found")));
         course = courseRepository.save(course);
         return convertToResponseDTO(course);
     }
+
 
     public void deleteCourse(UUID id) {
         courseRepository.deleteById(id);
@@ -88,9 +88,9 @@ public class CourseService {
                 .image(course.getImage())
                 .trailerVideo(course.getTrailerVideo())
                 .price(course.getPrice())
-                .whatToExpects(course.getWhatToExpects())
+                .whatToExpects(course.getWhatToExpects()) // Handling IconDescription
                 .purpose(course.getPurpose())
-                .icons(course.getIcons())
+//                .icons(course.getIcons())
                 .results(course.getResults())
                 .category(convertToCategoryDTO(course.getCategory()))
                 .trainings(Collections.singletonList(TrainingDTO.builder().id(course.getId()).title(course.getTitle()).build()))
