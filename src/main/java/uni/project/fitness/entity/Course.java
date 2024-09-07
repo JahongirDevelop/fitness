@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import uni.project.fitness.entity.icons.IconDescription;
 import java.util.List;
 
 @Entity(name = "course")
@@ -25,18 +26,19 @@ public class Course extends BaseEntity {
     private String trailerVideo;
     private Double price;
 
-    private String whatToExpects;
-    private String purpose; // maqsadi, kurs sizga nima beradi
+    @ElementCollection(targetClass = IconDescription.class)
+    @Enumerated(EnumType.STRING)
+    private List<IconDescription> whatToExpects;  // Updated to use IconDescription enum
+
+    private String purpose;
+
+//    @ElementCollection
+//    private List<String> icons;
 
     @ElementCollection
-    private List<String> icons;
-
-    @ElementCollection
-    private List<String> results; // nima natijalar olasiz bu kursda
+    private List<String> results;
 
     @ManyToOne
     @JsonBackReference
     private Category category;
 }
-
-

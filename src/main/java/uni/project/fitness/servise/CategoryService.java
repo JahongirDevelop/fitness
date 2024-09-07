@@ -77,7 +77,7 @@ public class CategoryService {
                 .price(course.getPrice())
                 .whatToExpects(course.getWhatToExpects())
                 .purpose(course.getPurpose())
-                .icons(course.getIcons())
+//                .icons(course.getIcons())
                 .results(course.getResults())
                 .category(convertToCategoryDTO(course.getCategory()))
                 .trainings(Collections.singletonList(TrainingDTO.builder().id(course.getId()).title(course.getTitle()).build()))
