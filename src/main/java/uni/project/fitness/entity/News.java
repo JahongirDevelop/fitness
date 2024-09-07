@@ -13,12 +13,12 @@ public class News extends BaseEntity {
     private String title;
     private String subTitle;
     private String description;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "category_id")
+//    private Category category;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-    private String image;
+    private String media;
 }
 
 
