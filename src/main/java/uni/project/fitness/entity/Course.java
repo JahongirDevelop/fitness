@@ -28,7 +28,10 @@ public class Course extends BaseEntity {
 
     @ElementCollection(targetClass = IconDescription.class)
     @Enumerated(EnumType.STRING)
-    private List<IconDescription> whatToExpects;  // Updated to use IconDescription enum
+    private List<IconDescription> whatYouWillGet;  // Updated to use IconDescription enum
+
+    @ElementCollection
+    private List<String> whatToExpects;
 
     private String purpose;
 

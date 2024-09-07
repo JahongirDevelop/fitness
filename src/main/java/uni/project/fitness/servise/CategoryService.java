@@ -75,6 +75,7 @@ public class CategoryService {
                 .image(course.getImage())
                 .trailerVideo(course.getTrailerVideo())
                 .price(course.getPrice())
+                .whatYouWillGet(course.getWhatYouWillGet())
                 .whatToExpects(course.getWhatToExpects())
                 .purpose(course.getPurpose())
 //                .icons(course.getIcons())

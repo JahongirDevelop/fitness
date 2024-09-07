@@ -35,7 +35,8 @@ public class CourseService {
                 .image(requestDTO.getImage())
                 .trailerVideo(requestDTO.getTrailerVideo())
                 .price(requestDTO.getPrice())
-                .whatToExpects(requestDTO.getWhatToExpects()) // Use IconDescription
+                .whatYouWillGet(requestDTO.getWhatYouWillGet()) // Use IconDescription
+                .whatToExpects(requestDTO.getWhatToExpects())
                 .purpose(requestDTO.getPurpose())
 //                .icons(requestDTO.getIcons())
                 .results(requestDTO.getResults())
@@ -53,7 +54,8 @@ public class CourseService {
         course.setImage(requestDTO.getImage());
         course.setTrailerVideo(requestDTO.getTrailerVideo());
         course.setPrice(requestDTO.getPrice());
-        course.setWhatToExpects(requestDTO.getWhatToExpects()); // Use IconDescription
+        course.setWhatYouWillGet(requestDTO.getWhatYouWillGet()); // Use IconDescription
+        course.setWhatToExpects(requestDTO.getWhatToExpects());
         course.setPurpose(requestDTO.getPurpose());
 //        course.setIcons(requestDTO.getIcons());
         course.setResults(requestDTO.getResults());
@@ -88,7 +90,8 @@ public class CourseService {
                 .image(course.getImage())
                 .trailerVideo(course.getTrailerVideo())
                 .price(course.getPrice())
-                .whatToExpects(course.getWhatToExpects()) // Handling IconDescription
+                .whatYouWillGet(course.getWhatYouWillGet()) // Handling IconDescription
+                .whatToExpects(course.getWhatToExpects())
                 .purpose(course.getPurpose())
 //                .icons(course.getIcons())
                 .results(course.getResults())
