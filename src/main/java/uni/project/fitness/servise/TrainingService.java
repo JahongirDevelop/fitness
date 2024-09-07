@@ -104,7 +104,7 @@ public class TrainingService {
     }
 
     private CourseResponseDTO convertCourseToResponseDTO(Course course, boolean includeTrainings) {
-        CourseResponseDTO.CourseResponseDTOBuilder builder = CourseResponseDTO.builder()
+        CourseResponseDTO builder = CourseResponseDTO.builder()
                 .id(course.getId())
                 .title(course.getTitle())
                 .subTitle(course.getSubTitle())
@@ -114,10 +114,10 @@ public class TrainingService {
                 .price(course.getPrice())
                 .whatToExpects(course.getWhatToExpects())
                 .purpose(course.getPurpose())
-                .icons(course.getIcons())
+//                .icons(course.getIcons())
                 .results(course.getResults())
                 .trainings(Collections.singletonList(TrainingDTO.builder().id(course.getId()).title(course.getTitle()).build()))
-                .category(CategoryDTO.builder().id(course.getCategory().getId()).name(course.getCategory().getName()).build());
+                .category(CategoryDTO.builder().id(course.getCategory().getId()).name(course.getCategory().getName()).build()).build();
 
 //        if (includeTrainings && course.getTrainings() != null) {
 //            builder.trainings(course.getTrainings().stream()
@@ -125,7 +125,7 @@ public class TrainingService {
 //                    .collect(Collectors.toList()));
 //        }
 
-        return builder.build();
+         return builder;
     }
 
 
