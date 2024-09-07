@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_IP:localhost}:${DB_PORT:5432}/${DB_NAME:fitness}
+    url: jdbc:postgresql://${DB_IP:localhost}:${DB_PORT:5432}/${DB_NAME:fitnessdatabase}
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:1}
     driver-class-name: org.postgresql.Driver
