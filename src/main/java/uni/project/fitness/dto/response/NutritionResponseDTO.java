@@ -15,6 +15,6 @@ public class NutritionResponseDTO {
     private String title;
     private String subTitle;
     private String image;
-    private List<String> description;
+    private String description;
 }
 

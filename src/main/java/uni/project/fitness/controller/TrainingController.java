@@ -47,5 +47,9 @@ public class TrainingController {
     public ResponseEntity<List<TrainingResponseDTO>> getTrainingsByCourse(@PathVariable UUID courseId) {
         return ResponseEntity.ok(trainingService.getTrainingsByCourse(courseId));
     }
+    @GetMapping("/get-all-by-teacher/{teacherId}")
+    public ResponseEntity<List<TrainingResponseDTO>> getTrainingsByTeacher(@PathVariable UUID teacherId) {
+        return ResponseEntity.ok(trainingService.getTrainingsByTeacher(teacherId));
+    }
 
 }

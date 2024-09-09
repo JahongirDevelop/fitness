@@ -146,11 +146,11 @@ public class TrainingService {
                 .image(teacher.getImage())
                 .workType(teacher.getWorkType())
                 .about(teacher.getAbout())
-                .trainings(teacher.getTrainingList() != null
-                        ? teacher.getTrainingList().stream()
-                        .map(Training::getId)
-                        .collect(Collectors.toList())
-                        : new ArrayList<>()) // Handle case where trainings might be null
+//                .trainings(teacher.getTrainingList() != null
+//                        ? teacher.getTrainingList().stream()
+//                        .map(Training::getId)
+//                        .collect(Collectors.toList())
+//                        : new ArrayList<>()) // Handle case where trainings might be null
                 .build();
     }
 
@@ -159,6 +159,16 @@ public class TrainingService {
                     .orElseThrow(() -> new DataNotFoundException("Course not found with id: " + courseId));
         List<TrainingResponseDTO> responseDTOList = new ArrayList<>();
         for (Training training : trainingRepository.findByCourse(course)) {
+            responseDTOList.add(convertToResponseDTO(training));
+        }
+        return responseDTOList;
+    }
+
+    public List<TrainingResponseDTO> getTrainingsByTeacher(UUID teacherId) {
+        Teacher teacher = teacherRepository.findById(teacherId)
+                .orElseThrow(() -> new DataNotFoundException("Teacher not found with id: " + teacherId));
+        List<TrainingResponseDTO> responseDTOList = new ArrayList<>();
+        for (Training training : trainingRepository.findByTeacher(teacher)) {
             responseDTOList.add(convertToResponseDTO(training));
         }
         return responseDTOList;

@@ -1,7 +1,10 @@
 package uni.project.fitness.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import lombok.*;
+import uni.project.fitness.entity.icons.IconDescription;
 
 import java.util.List;
 @Entity(name = "nutrition")
@@ -14,5 +17,9 @@ public class Nutrition extends BaseEntity {
     private String title;
     private String subTitle;
     private String image;
-    private List<String> description;
+
+    // Store the description as a single text field in the database
+    @Column(columnDefinition = "TEXT")
+    private String description;
 }
+

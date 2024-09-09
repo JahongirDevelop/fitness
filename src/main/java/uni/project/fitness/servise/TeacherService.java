@@ -65,11 +65,11 @@ public class TeacherService {
                 .image(teacher.getImage())
                 .workType(teacher.getWorkType())
                 .about(teacher.getAbout())
-                .trainings(teacher.getTrainingList() != null
-                        ? teacher.getTrainingList().stream()
-                        .map(Training::getId)
-                        .collect(Collectors.toList())
-                        : new ArrayList<>()) // Handle case where trainings might be null
+//                .trainings(teacher.getTrainingList() != null
+//                        ? teacher.getTrainingList().stream()
+//                        .map(Training::getId)
+//                        .collect(Collectors.toList())
+//                        : new ArrayList<>()) // Handle case where trainings might be null
                 .build();
     }
 

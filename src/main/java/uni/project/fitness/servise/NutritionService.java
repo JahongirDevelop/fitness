@@ -39,9 +39,17 @@ public class NutritionService {
     // Get all nutrition entries
     public List<NutritionResponseDTO> getAllNutritions() {
         return nutritionRepository.findAll().stream()
-                .map(nutrition -> modelMapper.map(nutrition, NutritionResponseDTO.class))
+                .map(nutrition -> {
+                    // Map the Nutrition entity to the DTO
+                    NutritionResponseDTO dto = modelMapper.map(nutrition, NutritionResponseDTO.class);
+                    // Set description directly as it is now a single text field
+                    dto.setDescription(nutrition.getDescription());
+                    return dto;
+                })
                 .collect(Collectors.toList());
     }
+
+
 
     // Update an existing nutrition entry
     public NutritionResponseDTO updateNutrition(UUID id, NutritionRequestDTO requestDTO) {
