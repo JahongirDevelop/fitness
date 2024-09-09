@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.config.security.JwtResponse;
 import uni.project.fitness.dto.auth.AuthDto;
 import uni.project.fitness.dto.auth.SignUp;
+import uni.project.fitness.dto.response.UserProfileResponse;
+import uni.project.fitness.dto.response.UserResponse;
 import uni.project.fitness.servise.AuthService;
 
 @RestController
@@ -18,7 +20,7 @@ public class AuthController {
 
     @PermitAll
     @PostMapping("/sign-up")
-    public ResponseEntity<String> signUp(@RequestBody SignUp signUp){
+    public ResponseEntity<UserProfileResponse> signUp(@RequestBody SignUp signUp){
         return ResponseEntity.ok().body(authService.addUser(signUp));
     }
 
