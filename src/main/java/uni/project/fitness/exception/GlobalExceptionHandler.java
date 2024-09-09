@@ -16,22 +16,29 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorDTO> dataNotFoundExceptionHandler(DataNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDTO(e.getMessage(), 404));
     }
+
     @ExceptionHandler(NotEnoughFundsException.class)
     public ResponseEntity<ErrorDTO> notEnoughFundsExceptionHandler(NotEnoughFundsException e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorDTO(e.getMessage(), 401));
     }
+
     @ExceptionHandler(WrongPasswordException.class)
     public ResponseEntity<ErrorDTO> wrongPasswordException(WrongPasswordException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDTO(e.getMessage(), 400));
     }
+
     @ExceptionHandler(BindException.class)
     public ResponseEntity<ErrorDTO> bindExceptionHandler(BindException e) {
-        e.getAllErrors().get(0).getDefaultMessage();
-
         StringBuilder errors = new StringBuilder();
         e.getAllErrors().forEach(error -> {
             errors.append(error.getDefaultMessage()).append("\n");
         });
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDTO(errors.toString(), 400));
+    }
+
+    // Exception handler for DataAlreadyExistsException
+    @ExceptionHandler(DataAlreadyExistsException.class)
+    public ResponseEntity<ErrorDTO> dataAlreadyExistsExceptionHandler(DataAlreadyExistsException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorDTO(e.getMessage(), 409));
     }
 }
