@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.config.security.JwtResponse;
 import uni.project.fitness.dto.auth.AuthDto;
 import uni.project.fitness.dto.auth.SignUp;
-import uni.project.fitness.dto.response.UserProfileResponse;
-import uni.project.fitness.dto.response.UserResponse;
+import uni.project.fitness.exception.ErrorDTO;
 import uni.project.fitness.servise.AuthService;
 
 @RestController
@@ -20,8 +19,8 @@ public class AuthController {
 
     @PermitAll
     @PostMapping("/sign-up")
-    public ResponseEntity<UserProfileResponse> signUp(@RequestBody SignUp signUp){
-        return ResponseEntity.ok().body(authService.addUser(signUp));
+    public ResponseEntity<ErrorDTO> signUp(@RequestBody SignUp signUp) {
+        return ResponseEntity.status(200).body(authService.addUser(signUp));
     }
 
     @PermitAll
@@ -36,9 +35,9 @@ public class AuthController {
         return authService.refreshToken(refreshToken);
     }
 
-    @GetMapping("/get-test")
-    public String test(){
-        return "Working";
-    }
+//    @GetMapping("/get-test")
+//    public String test(){
+//        return "Working";
+//    }
 }
 

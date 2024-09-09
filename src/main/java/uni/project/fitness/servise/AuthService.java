@@ -12,10 +12,10 @@ import uni.project.fitness.config.security.JwtResponse;
 import uni.project.fitness.config.security.JwtService;
 import uni.project.fitness.dto.auth.SignUp;
 import uni.project.fitness.dto.auth.AuthDto;
-import uni.project.fitness.dto.response.UserProfileResponse;
 import uni.project.fitness.entity.UserEntity;
 import uni.project.fitness.exception.DataAlreadyExistsException;
 import uni.project.fitness.exception.DataNotFoundException;
+import uni.project.fitness.exception.ErrorDTO;
 import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.entity.enums.UserRole;
 import java.util.UUID;
@@ -30,7 +30,7 @@ public class AuthService {
 
     private AuthenticationManager authenticationManager;
 
-    public UserProfileResponse addUser(SignUp signUp) {
+    public ErrorDTO addUser(SignUp signUp) {
         if (userRepository.existsByEmail(signUp.getEmail())) {
             throw new DataAlreadyExistsException("This email already exists: " + signUp.getEmail());
         }
@@ -40,13 +40,15 @@ public class AuthService {
         user.setRole(UserRole.USER);
         userRepository.save(user);
 
-        return UserProfileResponse.builder()
-                .id(user.getId())
-                .email(user.getEmail())
-                .name(user.getName())
-                .password(user.getPassword())
-                .phoneNumber(user.getPhoneNumber())
-                .build();
+        return new ErrorDTO("User successfully registered", 200);
+
+//        return UserProfileResponse.builder()
+//                .id(user.getId())
+//                .email(user.getEmail())
+//                .name(user.getName())
+//                .password(user.getPassword())
+//                .phoneNumber(user.getPhoneNumber())
+//                .build();
     }
 
     public JwtResponse signIn(AuthDto dto) {
