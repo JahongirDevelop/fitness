@@ -81,7 +81,7 @@ public class CourseService {
                 .collect(Collectors.toList());
     }
 
-    private CourseResponseDTO convertToResponseDTO(Course course) {
+    public CourseResponseDTO convertToResponseDTO(Course course) {
         return CourseResponseDTO.builder()
                 .id(course.getId())
                 .title(course.getTitle())

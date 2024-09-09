@@ -26,6 +26,7 @@ public class UserProfileService {
                 .name(user.getName())
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
+                .password(user.getPassword())
                 .build();
     }
 
