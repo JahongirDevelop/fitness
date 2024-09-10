@@ -153,12 +153,13 @@ public class CourseService {
         }
         return responseDTOList;
     }
-    public Map<UUID, String> getAllCourseIdsAndTrailerVideos() {
+    public List<CourseTrailerDTO> getAllCourseIdsAndTrailerVideos() {
         return courseRepository.findAll().stream()
-                .collect(Collectors.toMap(
-                        Course::getId,    // key: Course ID
-                        Course::getTrailerVideo   // value: Trailer Video URL
-                ));
+                .map(course -> new CourseTrailerDTO(
+                        course.getId(),
+                        course.getTrailerVideo()
+                ))
+                .collect(Collectors.toList());
     }
 
 }
