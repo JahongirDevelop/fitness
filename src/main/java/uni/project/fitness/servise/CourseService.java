@@ -96,12 +96,12 @@ public class CourseService {
 //                .icons(course.getIcons())
                 .results(course.getResults())
                 .category(convertToCategoryDTO(course.getCategory()))
-                .trainings(Collections.singletonList(TrainingDTO.builder().id(course.getId()).title(course.getTitle()).build()))
-//                .trainings(course.getTrainings() != null ?
-//                        course.getTrainings().stream()
-//                                .map(this::convertTrainingToResponseDTO)
-//                                .collect(Collectors.toList())
-//                        : new ArrayList<>())
+//                .trainings(Collections.singletonList(TrainingDTO.builder().id(course.getId()).title(course.getTitle()).description(course.getDescription()).build()))
+                .trainings(course.getTrainings() != null ?
+                        course.getTrainings().stream()
+                                .map(this::convertTrainingDTO)
+                                .collect(Collectors.toList())
+                        : new ArrayList<>())
                 .build();
     }
 
@@ -119,6 +119,14 @@ public class CourseService {
                 .equipments(training.getEquipments())
                 .musclesInvolved(training.getMusclesInvolved())
                 .results(training.getResults())
+                .build();
+    }
+    private TrainingDTO convertTrainingDTO(Training training){
+        return TrainingDTO.builder()
+                .description(training.getDescription())
+                .id(training.getId())
+                .image(training.getImage())
+                .title(training.getTitle())
                 .build();
     }
 

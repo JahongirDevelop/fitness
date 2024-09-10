@@ -81,7 +81,17 @@ public class CategoryService {
 //                .icons(course.getIcons())
                 .results(course.getResults())
                 .category(convertToCategoryDTO(course.getCategory()))
-                .trainings(Collections.singletonList(TrainingDTO.builder().id(course.getId()).title(course.getTitle()).build()))
+                .trainings(course.getTrainings().stream()
+                        .map(this::convertTrainingDTO)
+                        .collect(Collectors.toList()))
+                .build();
+    }
+    private TrainingDTO convertTrainingDTO(Training training){
+        return TrainingDTO.builder()
+                .description(training.getDescription())
+                .id(training.getId())
+                .image(training.getImage())
+                .title(training.getTitle())
                 .build();
     }
 

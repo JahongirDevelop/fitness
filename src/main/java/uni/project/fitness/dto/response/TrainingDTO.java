@@ -11,4 +11,6 @@ import java.util.UUID;
 public class TrainingDTO {
     private UUID id;
     private String title;
+    private String description;
+    private String image;
 }
