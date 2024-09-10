@@ -9,6 +9,7 @@ import uni.project.fitness.entity.Course;
 import uni.project.fitness.servise.CourseService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -46,5 +47,10 @@ public class CourseController {
     @GetMapping("/get-all-by-category/{categoryId}")
     public ResponseEntity<List<CourseResponseDTO>> getCoursesByCategory(@PathVariable UUID categoryId) {
         return ResponseEntity.ok(courseService.getCoursesByCategory(categoryId));
+    }
+
+    @GetMapping("/trailer-videos")
+    public Map<UUID, String> getCourseIdsAndTrailerVideos() {
+        return courseService.getAllCourseIdsAndTrailerVideos();
     }
 }

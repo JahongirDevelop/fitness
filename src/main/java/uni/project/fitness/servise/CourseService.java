@@ -14,10 +14,7 @@ import uni.project.fitness.repository.CourseRepository;
 import uni.project.fitness.repository.TeacherRepository;
 import uni.project.fitness.repository.TrainingRepository;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -156,4 +153,12 @@ public class CourseService {
         }
         return responseDTOList;
     }
+    public Map<UUID, String> getAllCourseIdsAndTrailerVideos() {
+        return courseRepository.findAll().stream()
+                .collect(Collectors.toMap(
+                        Course::getId,    // key: Course ID
+                        Course::getTrailerVideo   // value: Trailer Video URL
+                ));
+    }
+
 }
