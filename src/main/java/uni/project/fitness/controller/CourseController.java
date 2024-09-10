@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.CourseRequestDTO;
 import uni.project.fitness.dto.response.CourseResponseDTO;
+import uni.project.fitness.dto.response.CourseTrailerDTO;
 import uni.project.fitness.entity.Course;
 import uni.project.fitness.servise.CourseService;
 
@@ -50,7 +51,7 @@ public class CourseController {
     }
 
     @GetMapping("/trailer-videos")
-    public Map<UUID, String> getCourseIdsAndTrailerVideos() {
+    public List<CourseTrailerDTO> getCourseIdsAndTrailerVideos() {
         return courseService.getAllCourseIdsAndTrailerVideos();
     }
 }
