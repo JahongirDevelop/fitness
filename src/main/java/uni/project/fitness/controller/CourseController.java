@@ -50,8 +50,8 @@ public class CourseController {
         return ResponseEntity.ok(courseService.getCoursesByCategory(categoryId));
     }
 
-    @GetMapping("/trailer-videos")
-    public List<CourseTrailerDTO> getCourseIdsAndTrailerVideos() {
-        return courseService.getAllCourseIdsAndTrailerVideos();
+    @GetMapping("/trailer-images")
+    public List<CourseTrailerDTO> getCourseIdsAndTrailerImages() {
+        return courseService.getAllCourseIdsAndTrailerImages();
     }
 }
