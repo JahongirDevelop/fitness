@@ -153,11 +153,11 @@ public class CourseService {
         }
         return responseDTOList;
     }
-    public List<CourseTrailerDTO> getAllCourseIdsAndTrailerVideos() {
+    public List<CourseTrailerDTO> getAllCourseIdsAndTrailerImages() {
         return courseRepository.findAll().stream()
                 .map(course -> new CourseTrailerDTO(
                         course.getId(),
-                        course.getTrailerVideo()
+                        course.getImage()
                 ))
                 .collect(Collectors.toList());
     }
