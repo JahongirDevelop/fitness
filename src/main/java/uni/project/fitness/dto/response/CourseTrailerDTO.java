@@ -13,6 +13,6 @@ import java.util.UUID;
 @Builder
 public class CourseTrailerDTO {
     private UUID id;
-    private String trailerVideo;
+    private String image;
 }
 
