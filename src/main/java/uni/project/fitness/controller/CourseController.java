@@ -54,11 +54,7 @@ public class CourseController {
         return courseService.getAllCourseIdsAndTrailerImages();
     }
 
-    @GetMapping("/get-all-categories-for-user/{userId}")
-    public ResponseEntity<List<CategoryResponseDTOForUser>> getAllCoursesForUser(@PathVariable UUID userId) {
-        List<CategoryResponseDTOForUser> response = courseService.getAllCoursesForUser(userId);
-        return ResponseEntity.ok(response);
-    }
+
 
 
 }

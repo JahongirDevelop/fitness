@@ -96,29 +96,29 @@ public class CourseService {
                         : new ArrayList<>())
                 .build();
     }
-    public UserCourseResponseDTO  convertToUserCourseResponseDTO (Course course) {
-        return UserCourseResponseDTO .builder()
-                .id(course.getId())
-                .title(course.getTitle())
-                .subTitle(course.getSubTitle())
-                .description(course.getDescription())
-                .image(course.getImage())
-                .trailerVideo(course.getTrailerVideo())
-                .price(course.getPrice())
-                .whatYouWillGet(course.getWhatYouWillGet()) // Handling IconDescription
-                .whatToExpects(course.getWhatToExpects())
-                .purpose(course.getPurpose())
-//                .icons(course.getIcons())
-                .results(course.getResults())
-                .category(convertToCategoryDTO(course.getCategory()))
-//                .trainings(Collections.singletonList(TrainingDTO.builder().id(course.getId()).title(course.getTitle()).description(course.getDescription()).build()))
-                .trainings(course.getTrainings() != null ?
-                        course.getTrainings().stream()
-                                .map(this::convertTrainingDTO)
-                                .collect(Collectors.toList())
-                        : new ArrayList<>())
-                .build();
-    }
+//    public UserCourseResponseDTO  convertToUserCourseResponseDTO (Course course) {
+//        return UserCourseResponseDTO .builder()
+//                .id(course.getId())
+//                .title(course.getTitle())
+//                .subTitle(course.getSubTitle())
+//                .description(course.getDescription())
+//                .image(course.getImage())
+//                .trailerVideo(course.getTrailerVideo())
+//                .price(course.getPrice())
+//                .whatYouWillGet(course.getWhatYouWillGet()) // Handling IconDescription
+//                .whatToExpects(course.getWhatToExpects())
+//                .purpose(course.getPurpose())
+////                .icons(course.getIcons())
+//                .results(course.getResults())
+//                .category(convertToCategoryDTO(course.getCategory()))
+////                .trainings(Collections.singletonList(TrainingDTO.builder().id(course.getId()).title(course.getTitle()).description(course.getDescription()).build()))
+//                .trainings(course.getTrainings() != null ?
+//                        course.getTrainings().stream()
+//                                .map(this::convertTrainingDTO)
+//                                .collect(Collectors.toList())
+//                        : new ArrayList<>())
+//                .build();
+//    }
 
 
     private TrainingResponseDTO convertTrainingToResponseDTO(Training training) {
@@ -180,49 +180,17 @@ public class CourseService {
                 .collect(Collectors.toList());
     }
 
-    public UserCourseResponseDTO  getCourseForUser(UUID courseId, UUID userId) {
-        Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new RuntimeException("Course not found"));
-        UserEntity user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        boolean isAccessible = course.isAccessibleForUser(user);
-        UserCourseResponseDTO  userCourseresponseDTO = convertToUserCourseResponseDTO(course);
-        userCourseresponseDTO.setIsAccessible(isAccessible);
-        return userCourseresponseDTO;
-    }
-
-    public List<CategoryResponseDTOForUser> getAllCoursesForUser(UUID userId) {
-        // Retrieve user entity or throw exception if not found
-        UserEntity user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        // Retrieve all categories from the repository
-        List<Category> categories = categoryRepository.findAll();
-
-        // Map each category to a CategoryResponseDTOForUser
-        return categories.stream()
-                .map(category -> {
-                    // For each category, get the courses belonging to it
-                    List<UserCourseResponseDTO> userCourses = category.getCourses().stream()
-                            .map(course -> {
-                                // Convert each course to UserCourseResponseDTO
-                                UserCourseResponseDTO userCourseDTO = convertToUserCourseResponseDTO(course);
-                                // Set the accessibility for each course
-                                userCourseDTO.setIsAccessible(course.isAccessibleForUser(user));
-                                return userCourseDTO;
-                            })
-                            .collect(Collectors.toList());
-
-                    // Return CategoryResponseDTOForUser with the list of user courses
-                    return CategoryResponseDTOForUser.builder()
-                            .id(category.getId())
-                            .name(category.getName())
-                            .courses(userCourses)
-                            .build();
-                })
-                .collect(Collectors.toList());
-    }
+//    public UserCourseResponseDTO  getCourseForUser(UUID courseId, UUID userId) {
+//        Course course = courseRepository.findById(courseId)
+//                .orElseThrow(() -> new RuntimeException("Course not found"));
+//        UserEntity user = userRepository.findById(userId)
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        boolean isAccessible = course.isAccessibleForUser(user);
+//        UserCourseResponseDTO  userCourseresponseDTO = convertToUserCourseResponseDTO(course);
+//        userCourseresponseDTO.setIsAccessible(isAccessible);
+//        return userCourseresponseDTO;
+//    }
 
 
 
