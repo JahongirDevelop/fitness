@@ -27,6 +27,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Subscription> subscriptions;  // User can have multiple course subscriptions
 
