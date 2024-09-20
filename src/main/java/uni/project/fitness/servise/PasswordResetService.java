@@ -10,7 +10,7 @@ import uni.project.fitness.repository.PasswordResetTokenRepository;
 import uni.project.fitness.repository.UserRepository;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -25,21 +25,23 @@ public class PasswordResetService {
                 .orElseThrow(() -> new DataNotFoundException("User not found"));
 
         // Generate a password reset token
-        String token = UUID.randomUUID().toString();
+        Random random = new Random();
+        int i = random.nextInt(100000);
+        String code = Integer.toString(i);
         PasswordResetToken passwordResetToken = PasswordResetToken.builder()
-                .token(token)
+                .code(code)
                 .user(user)
-                .expiryDate(LocalDateTime.now().plusSeconds(60))
+                .expiryDate(LocalDateTime.now().plusSeconds(120))
                 .build();
         tokenRepository.save(passwordResetToken);
 
         // Send email with reset link
-        emailService.sendPasswordResetEmail(user.getEmail(), token);
+        emailService.sendPasswordResetEmail(user.getEmail(), code);
     }
 
-    public void resetPassword(String token, String newPassword) {
-        PasswordResetToken passwordResetToken = tokenRepository.findByToken(token)
-                .orElseThrow(() -> new DataNotFoundException("Invalid token"));
+    public void resetPassword(String code, String newPassword) {
+        PasswordResetToken passwordResetToken = tokenRepository.findByCode(code)
+                .orElseThrow(() -> new DataNotFoundException("Invalid code"));
 
         if (passwordResetToken.getExpiryDate().isBefore(LocalDateTime.now())) {
             throw new DataNotFoundException("Token has expired");
