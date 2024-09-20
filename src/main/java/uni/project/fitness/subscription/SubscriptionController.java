@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.response.CourseResponseDTO;
+import uni.project.fitness.dto.response.UserCourseResponseDTO;
 import uni.project.fitness.entity.UserEntity;
 import uni.project.fitness.servise.CourseService;
 
@@ -28,8 +29,8 @@ public class SubscriptionController {
         subscriptionService.extendSubscription(userId, courseId, period);
         return ResponseEntity.ok("Subscription extended successfully for the course");
     }
-    @GetMapping("/get-user-courses/{courseId}/{userId}")
-    public ResponseEntity<CourseResponseDTO> getCourse(@PathVariable UUID courseId, @PathVariable UUID userId) {
+    @GetMapping("/get-course-for-user/{courseId}/{userId}")
+    public ResponseEntity<UserCourseResponseDTO> getCourseForUser(@PathVariable UUID courseId, @PathVariable UUID userId) {
         return ResponseEntity.ok(courseService.getCourseForUser(courseId, userId));
     }
 }
