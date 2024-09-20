@@ -38,7 +38,6 @@ public class UserController {
         return ResponseEntity.ok(userResponse);
     }
 
-
     @GetMapping("/get-current-user-role")
     public Object getCurrentUser2(Authentication authentication) {
         return authentication.getAuthorities();
