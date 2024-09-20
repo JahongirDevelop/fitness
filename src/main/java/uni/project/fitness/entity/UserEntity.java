@@ -7,9 +7,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import uni.project.fitness.entity.enums.UserRole;
+import uni.project.fitness.subscription.Subscription;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name = "users")
@@ -25,6 +27,13 @@ public class UserEntity extends BaseEntity implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole role;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Subscription> subscriptions;  // User can have multiple course subscriptions
+
+    public boolean hasActiveSubscriptionForCourse(Course course) {
+        return subscriptions.stream()
+                .anyMatch(subscription -> subscription.getCourse().equals(course) && subscription.isActive());
+    }
 
 //    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 //    private List<Order> orders;

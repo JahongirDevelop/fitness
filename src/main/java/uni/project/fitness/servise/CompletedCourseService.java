@@ -13,7 +13,6 @@ import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.repository.CompletedCourseRepository;
 import uni.project.fitness.repository.CourseRepository;
 import uni.project.fitness.repository.UserRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -28,16 +27,11 @@ public class CompletedCourseService {
     private final UserRepository userRepository;
     private final CourseService courseService;
     public List<CompletedCourseDTO> getCompletedCoursesByUserId(UUID userId) {
-        // Fetch completed courses by user ID from the repository
         List<CompletedCourse> completedCourses = completedCourseRepository.findByUserId(userId);
-
-        // Map each completed course to a CompletedCourseDTO
         return completedCourses.stream()
                 .map(completedCourse -> {
-                    // Convert the Course entity to CourseResponseDTO
                     CourseResponseDTO courseResponseDTO = courseService.convertToResponseDTO(completedCourse.getCourse());
 
-                    // Create and return a CompletedCourseDTO object
                     return CompletedCourseDTO.builder()
                             .courseResponseDTO(courseResponseDTO)
                             .build();
@@ -54,11 +48,9 @@ public class CompletedCourseService {
         if (completedCourseRepository.existsByUserIdAndCourseId(requestDTO.getUserId(), requestDTO.getCourseId())) {
             throw new IllegalArgumentException("User has already completed this course");
         }
-
-
         CompletedCourse completedCourse = CompletedCourse.builder()
-                .course(course)  // Assuming Course has a constructor with ID
-                .user(author)  // Assuming UserEntity has a constructor with ID
+                .course(course)
+                .user(author)
                 .build();
         CompletedCourse savedCompletedCourse = completedCourseRepository.save(completedCourse);
         return mapToResponseDTO(savedCompletedCourse);
