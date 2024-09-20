@@ -192,17 +192,38 @@ public class CourseService {
         return userCourseresponseDTO;
     }
 
-    public List<UserCourseResponseDTO > getAllCoursesForUser(UUID userId) {
+    public List<CategoryResponseDTOForUser> getAllCoursesForUser(UUID userId) {
+        // Retrieve user entity or throw exception if not found
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        List<Course> courses = courseRepository.findAll();
-        return courses.stream()
-                .map(course -> {
-                    UserCourseResponseDTO  dto = convertToUserCourseResponseDTO(course);
-                    dto.setIsAccessible(course.isAccessibleForUser(user));  // Check accessibility
-                    return dto;
+        // Retrieve all categories from the repository
+        List<Category> categories = categoryRepository.findAll();
+
+        // Map each category to a CategoryResponseDTOForUser
+        return categories.stream()
+                .map(category -> {
+                    // For each category, get the courses belonging to it
+                    List<UserCourseResponseDTO> userCourses = category.getCourses().stream()
+                            .map(course -> {
+                                // Convert each course to UserCourseResponseDTO
+                                UserCourseResponseDTO userCourseDTO = convertToUserCourseResponseDTO(course);
+                                // Set the accessibility for each course
+                                userCourseDTO.setIsAccessible(course.isAccessibleForUser(user));
+                                return userCourseDTO;
+                            })
+                            .collect(Collectors.toList());
+
+                    // Return CategoryResponseDTOForUser with the list of user courses
+                    return CategoryResponseDTOForUser.builder()
+                            .id(category.getId())
+                            .name(category.getName())
+                            .courses(userCourses)
+                            .build();
                 })
                 .collect(Collectors.toList());
     }
+
+
+
 }
