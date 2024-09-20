@@ -96,6 +96,29 @@ public class CourseService {
                         : new ArrayList<>())
                 .build();
     }
+    public UserCourseResponseDTO  convertToUserCourseResponseDTO (Course course) {
+        return UserCourseResponseDTO .builder()
+                .id(course.getId())
+                .title(course.getTitle())
+                .subTitle(course.getSubTitle())
+                .description(course.getDescription())
+                .image(course.getImage())
+                .trailerVideo(course.getTrailerVideo())
+                .price(course.getPrice())
+                .whatYouWillGet(course.getWhatYouWillGet()) // Handling IconDescription
+                .whatToExpects(course.getWhatToExpects())
+                .purpose(course.getPurpose())
+//                .icons(course.getIcons())
+                .results(course.getResults())
+                .category(convertToCategoryDTO(course.getCategory()))
+//                .trainings(Collections.singletonList(TrainingDTO.builder().id(course.getId()).title(course.getTitle()).description(course.getDescription()).build()))
+                .trainings(course.getTrainings() != null ?
+                        course.getTrainings().stream()
+                                .map(this::convertTrainingDTO)
+                                .collect(Collectors.toList())
+                        : new ArrayList<>())
+                .build();
+    }
 
 
     private TrainingResponseDTO convertTrainingToResponseDTO(Training training) {
@@ -157,15 +180,29 @@ public class CourseService {
                 .collect(Collectors.toList());
     }
 
-    public CourseResponseDTO getCourseForUser(UUID courseId, UUID userId) {
+    public UserCourseResponseDTO  getCourseForUser(UUID courseId, UUID userId) {
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new RuntimeException("Course not found"));
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         boolean isAccessible = course.isAccessibleForUser(user);
-        CourseResponseDTO courseResponseDTO = convertToResponseDTO(course);
-        courseResponseDTO.setIsAccessible(isAccessible);
-        return courseResponseDTO;
+        UserCourseResponseDTO  userCourseresponseDTO = convertToUserCourseResponseDTO(course);
+        userCourseresponseDTO.setIsAccessible(isAccessible);
+        return userCourseresponseDTO;
+    }
+
+    public List<UserCourseResponseDTO > getAllCoursesForUser(UUID userId) {
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<Course> courses = courseRepository.findAll();
+        return courses.stream()
+                .map(course -> {
+                    UserCourseResponseDTO  dto = convertToUserCourseResponseDTO(course);
+                    dto.setIsAccessible(course.isAccessibleForUser(user));  // Check accessibility
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 }
