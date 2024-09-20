@@ -39,13 +39,13 @@ public class UserController {
     }
 
 
-    @GetMapping("/get-role")
+    @GetMapping("/get-current-user-role")
     public Object getCurrentUser2(Authentication authentication) {
         return authentication.getAuthorities();
     }
 
 
-    @GetMapping("/get-id")
+    @GetMapping("/get-current-user-id")
     public Object getCurrentUser4(Authentication authentication) {
         return authentication.getName();
     }
