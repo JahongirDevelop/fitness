@@ -17,7 +17,7 @@ public class PasswordResetToken {
     private UUID id;
 
     @Column(nullable = false, unique = true)
-    private String token;
+    private String code;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
