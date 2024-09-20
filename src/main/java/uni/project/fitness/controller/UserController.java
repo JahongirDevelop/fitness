@@ -19,7 +19,7 @@ import java.util.UUID;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/getUserById/{id}")
     public ResponseEntity<Optional<UserResponse>> getUserById(@PathVariable UUID id) {
          return ResponseEntity.ok(userService.findById(id));
     }
