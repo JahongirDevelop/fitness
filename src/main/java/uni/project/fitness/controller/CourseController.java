@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.CourseRequestDTO;
-import uni.project.fitness.dto.response.CourseResponseDTO;
-import uni.project.fitness.dto.response.CourseTrailerDTO;
-import uni.project.fitness.dto.response.UserCourseResponseDTO;
+import uni.project.fitness.dto.response.*;
 import uni.project.fitness.entity.Course;
 import uni.project.fitness.servise.CourseService;
 
@@ -56,8 +54,11 @@ public class CourseController {
         return courseService.getAllCourseIdsAndTrailerImages();
     }
 
-    @GetMapping("/get-all-courses-for-user/{userId}")
-    public ResponseEntity<List<UserCourseResponseDTO>> getAllCoursesForUser(@PathVariable UUID userId) {
-        return ResponseEntity.ok(courseService.getAllCoursesForUser(userId));
+    @GetMapping("/get-all-categories-for-user/{userId}")
+    public ResponseEntity<List<CategoryResponseDTOForUser>> getAllCoursesForUser(@PathVariable UUID userId) {
+        List<CategoryResponseDTOForUser> response = courseService.getAllCoursesForUser(userId);
+        return ResponseEntity.ok(response);
     }
+
+
 }
