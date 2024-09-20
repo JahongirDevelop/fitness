@@ -38,8 +38,8 @@ public class MailSenderService {
 
     public void sendPasswordResetEmail(String email, String token) {
         try {
-            String resetUrl = "http://yourdomain.com/api/password-reset/reset?token=" + token;
-            String message = "Click the link to reset your password: " + resetUrl;
+//            String resetUrl = "Your reset password: " + token;
+            String message = "Code to reset your password: " + token;
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
             simpleMailMessage.setSubject("Your password reset link");
             simpleMailMessage.setFrom(sender);
