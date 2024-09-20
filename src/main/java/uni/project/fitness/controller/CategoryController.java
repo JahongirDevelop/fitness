@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.CategoryRequestDTO;
 import uni.project.fitness.dto.response.CategoryResponseDTO;
 //import uni.project.fitness.servise.CategoryService;
+import uni.project.fitness.dto.response.CategoryResponseDTOForUser;
 import uni.project.fitness.servise.CategoryService;
 
 import java.util.List;
@@ -41,5 +42,9 @@ public class CategoryController {
     @GetMapping
     public ResponseEntity<List<CategoryResponseDTO>> getAllCategories() {
         return ResponseEntity.ok(categoryService.getAllCategories());
+    }
+    @GetMapping("/get-all-categories-for-user/{userId}")
+    public ResponseEntity<List<CategoryResponseDTOForUser>> getAllCoursesForUser(@PathVariable UUID userId) {
+        return ResponseEntity.ok(categoryService.getAllCategoriesForUser(userId));
     }
 }
