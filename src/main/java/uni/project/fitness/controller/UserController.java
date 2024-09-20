@@ -6,11 +6,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.response.UserResponse;
-import uni.project.fitness.entity.UserEntity;
 import uni.project.fitness.entity.enums.UserRole;
 import uni.project.fitness.servise.UserService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -20,10 +20,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserEntity> getUserById(@PathVariable UUID id) {
-        return userService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Optional<UserResponse>> getUserById(@PathVariable UUID id) {
+         return ResponseEntity.ok(userService.findById(id));
     }
 
     @DeleteMapping("/{id}")
