@@ -1,19 +1,15 @@
 package uni.project.fitness.servise;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uni.project.fitness.dto.request.CategoryRequestDTO;
 import uni.project.fitness.dto.response.*;
-import uni.project.fitness.entity.Category;
-import uni.project.fitness.entity.Course;
-import uni.project.fitness.entity.Teacher;
-import uni.project.fitness.entity.Training;
+import uni.project.fitness.entity.*;
 import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.repository.CategoryRepository;
+import uni.project.fitness.repository.UserRepository;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -22,6 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CategoryService {
     private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
 
     public String createCategory(CategoryRequestDTO requestDTO) {
         Category category = Category.builder()
@@ -65,8 +62,6 @@ public class CategoryService {
     }
 
     private CourseResponseDTO convertCourseToResponseDTO(Course course) {
-        // Implement similar conversion logic for Course
-        // Assuming CourseResponseDTO is already implemented
         return CourseResponseDTO.builder()
                 .id(course.getId())
                 .title(course.getTitle())
@@ -78,7 +73,6 @@ public class CategoryService {
                 .whatYouWillGet(course.getWhatYouWillGet())
                 .whatToExpects(course.getWhatToExpects())
                 .purpose(course.getPurpose())
-//                .icons(course.getIcons())
                 .results(course.getResults())
                 .category(convertToCategoryDTO(course.getCategory()))
                 .trainings(course.getTrainings().stream()
@@ -101,36 +95,51 @@ public class CategoryService {
                 .name(category.getName())
                 .build();
     }
-    private TrainingResponseDTO convertTrainingToResponseDTO(Training training) {
-        return TrainingResponseDTO.builder()
-                .id(training.getId())
-                .title(training.getTitle())
-                .teacher(convertTeacherToResponseDTO(training.getTeacher()))
-                .description(training.getDescription())
-                .shortDescription(training.getShortDescription())
-                .image(training.getImage())
-                .video(training.getVideo())
-                .importantInfo(training.getImportantInfo())
-                .equipments(training.getEquipments())
-                .musclesInvolved(training.getMusclesInvolved())
-                .results(training.getResults())
-                .course(CourseDTO.builder().id(training.getCourse().getId()).title(training.getCourse().getTitle()).build())
-                .build();
-    }
-    private TeacherResponseDTO convertTeacherToResponseDTO(Teacher teacher) {
-        return TeacherResponseDTO.builder()
-                .id(teacher.getId())
-                .name(teacher.getName())
-                .image(teacher.getImage())
-                .workType(teacher.getWorkType())
-                .about(teacher.getAbout())
-//                .trainings(teacher.getTrainingList() != null
-//                        ? teacher.getTrainingList().stream()
-//                        .map(Training::getId)
-//                        .collect(Collectors.toList())
-//                        : new ArrayList<>()) // Handle case where trainings might be null
-                .build();
+
+    public List<CategoryResponseDTOForUser> getAllCategoriesForUser(UUID userId) {
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<Category> categories = categoryRepository.findAll();
+
+        return categories.stream()
+                .map(category -> {
+                    List<UserCourseResponseDTO> userCourses = category.getCourses().stream()
+                            .map(course -> {
+                                UserCourseResponseDTO userCourseDTO = convertToUserCourseResponseDTO(course);
+                                userCourseDTO.setIsAccessible(course.isAccessibleForUser(user));
+                                return userCourseDTO;
+                            })
+                            .collect(Collectors.toList());
+
+                    return CategoryResponseDTOForUser.builder()
+                            .id(category.getId())
+                            .name(category.getName())
+                            .courses(userCourses)
+                            .build();
+                })
+                .collect(Collectors.toList());
     }
 
-
+    public UserCourseResponseDTO  convertToUserCourseResponseDTO (Course course) {
+        return UserCourseResponseDTO .builder()
+                .id(course.getId())
+                .title(course.getTitle())
+                .subTitle(course.getSubTitle())
+                .description(course.getDescription())
+                .image(course.getImage())
+                .trailerVideo(course.getTrailerVideo())
+                .price(course.getPrice())
+                .whatYouWillGet(course.getWhatYouWillGet())
+                .whatToExpects(course.getWhatToExpects())
+                .purpose(course.getPurpose())
+                .results(course.getResults())
+                .category(convertToCategoryDTO(course.getCategory()))
+                .trainings(course.getTrainings() != null ?
+                        course.getTrainings().stream()
+                                .map(this::convertTrainingDTO)
+                                .collect(Collectors.toList())
+                        : new ArrayList<>())
+                .build();
+    }
 }

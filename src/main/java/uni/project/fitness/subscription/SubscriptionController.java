@@ -29,9 +29,9 @@ public class SubscriptionController {
         subscriptionService.extendSubscription(userId, courseId, period);
         return ResponseEntity.ok("Subscription extended successfully for the course");
     }
-    @GetMapping("/get-course-for-user/{courseId}/{userId}")
-    public ResponseEntity<UserCourseResponseDTO> getCourseForUser(@PathVariable UUID courseId, @PathVariable UUID userId) {
-        return ResponseEntity.ok(courseService.getCourseForUser(courseId, userId));
-    }
+//    @GetMapping("/get-course-for-user/{courseId}/{userId}")
+//    public ResponseEntity<UserCourseResponseDTO> getCourseForUser(@PathVariable UUID courseId, @PathVariable UUID userId) {
+//        return ResponseEntity.ok(courseService.getCourseForUser(courseId, userId));
+//    }
 }
 
