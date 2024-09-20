@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PasswordResetDto {
-    private String token;
+    private String code;
     private String newPassword;
 }
