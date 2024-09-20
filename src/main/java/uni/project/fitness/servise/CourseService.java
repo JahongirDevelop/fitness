@@ -4,15 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uni.project.fitness.dto.request.CourseRequestDTO;
 import uni.project.fitness.dto.response.*;
-import uni.project.fitness.entity.Category;
-import uni.project.fitness.entity.Course;
-import uni.project.fitness.entity.Teacher;
-import uni.project.fitness.entity.Training;
+import uni.project.fitness.entity.*;
 import uni.project.fitness.exception.DataNotFoundException;
-import uni.project.fitness.repository.CategoryRepository;
-import uni.project.fitness.repository.CourseRepository;
-import uni.project.fitness.repository.TeacherRepository;
-import uni.project.fitness.repository.TrainingRepository;
+import uni.project.fitness.repository.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,6 +18,7 @@ public class CourseService {
     private final CategoryRepository categoryRepository;
     private final TeacherRepository teacherRepository;
     private final TrainingRepository trainingRepository;
+    private final UserRepository userRepository;
     public CourseResponseDTO createCourse(CourseRequestDTO requestDTO) {
         Course course = Course.builder()
                 .title(requestDTO.getTitle())
@@ -162,4 +157,15 @@ public class CourseService {
                 .collect(Collectors.toList());
     }
 
+    public CourseResponseDTO getCourseForUser(UUID courseId, UUID userId) {
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        boolean isAccessible = course.isAccessibleForUser(user);
+        CourseResponseDTO courseResponseDTO = convertToResponseDTO(course);
+        courseResponseDTO.setIsAccessible(isAccessible);
+        return courseResponseDTO;
+    }
 }

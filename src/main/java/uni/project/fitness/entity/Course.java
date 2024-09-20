@@ -44,4 +44,7 @@ public class Course extends BaseEntity {
     @ManyToOne
     @JsonBackReference
     private Category category;
+    public boolean isAccessibleForUser(UserEntity user) {
+        return user.hasActiveSubscriptionForCourse(this);  // Check if user has an active subscription for this course
+    }
 }
