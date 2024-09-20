@@ -18,6 +18,4 @@ public class UserResponse {
     private String email;
     private String password;
     private UserRole role;
-    private List<SubscriptionDTO> subscriptions;  // Include user's subscriptions
-
 }
