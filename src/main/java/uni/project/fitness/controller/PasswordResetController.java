@@ -18,12 +18,12 @@ public class PasswordResetController {
     @PostMapping("/request")
     public ResponseEntity<String> requestPasswordReset(@RequestBody PasswordResetRequest request) {
         passwordResetService.sendPasswordResetLink(request.getEmail());
-        return ResponseEntity.ok("Password reset link sent.");
+        return ResponseEntity.ok("Password reset code sent.");
     }
 
     @PostMapping("/reset")
     public ResponseEntity<String> resetPassword(@RequestBody PasswordResetDto passwordResetDto) {
-        passwordResetService.resetPassword(passwordResetDto.getToken(), passwordResetDto.getNewPassword());
+        passwordResetService.resetPassword(passwordResetDto.getCode(), passwordResetDto.getNewPassword());
         return ResponseEntity.ok("Password has been reset.");
     }
 
