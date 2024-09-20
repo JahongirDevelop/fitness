@@ -8,11 +8,9 @@ import uni.project.fitness.entity.UserEntity;
 import uni.project.fitness.entity.enums.UserRole;
 import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.repository.UserRepository;
+import uni.project.fitness.subscription.SubscriptionDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +22,12 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public Optional<UserEntity> findById(UUID id) {
-        return userRepository.findById(id);
+    public Optional<UserResponse> findById(UUID id) {
+        Optional<UserEntity> userEntity = userRepository.findById(id);
+        UserResponse userResponse = modelMapper.map(userEntity, UserResponse.class);
+        userResponse.setId(userEntity.get().getId());
+        userResponse.setRole(userEntity.get().getRole());
+        return Optional.of(userResponse);
     }
 
     public String deleteUser(UUID id) {
