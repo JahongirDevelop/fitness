@@ -39,9 +39,16 @@ public class PasswordResetService {
         emailService.sendPasswordResetEmail(user.getEmail(), code);
     }
 
-    public void resetPassword(String code, String newPassword) {
+    public UserEntity findUser(String code){
         PasswordResetToken passwordResetToken = tokenRepository.findByCode(code)
-                .orElseThrow(() -> new DataNotFoundException("Invalid code"));
+                .orElseThrow(() -> new DataNotFoundException("Invalid code or User"));
+        return passwordResetToken.getUser();
+    }
+
+    public void resetPassword(String code, String newPassword) {
+        UserEntity userEntity = findUser(code);
+        PasswordResetToken passwordResetToken = tokenRepository.findByCodeAndUserId(code, userEntity.getId())
+                .orElseThrow(() -> new DataNotFoundException("Invalid code or user"));
 
         if (passwordResetToken.getExpiryDate().isBefore(LocalDateTime.now())) {
             throw new DataNotFoundException("Token has expired");
