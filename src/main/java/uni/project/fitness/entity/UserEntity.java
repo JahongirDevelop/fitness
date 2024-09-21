@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import uni.project.fitness.entity.enums.UserRole;
 import uni.project.fitness.subscription.Subscription;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,12 @@ public class UserEntity extends BaseEntity implements UserDetails {
     private String phoneNumber;
     private String email;
     private String password;
+    private Double height;
+    private Double currentWeight;
+    private Double targetWeight;
+    private LocalDate birthDay;
+    private String profilePicture;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
@@ -35,13 +42,6 @@ public class UserEntity extends BaseEntity implements UserDetails {
         return subscriptions.stream()
                 .anyMatch(subscription -> subscription.getCourse().equals(course) && subscription.isActive());
     }
-
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private List<Order> orders;
-//
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private List<Notification> notifications;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
