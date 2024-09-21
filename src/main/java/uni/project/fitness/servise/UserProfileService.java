@@ -21,12 +21,21 @@ public class UserProfileService {
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new DataNotFoundException("User not found"));
 
-        return UserProfileResponse.builder()
+        return getUserProfileResponse(user);
+    }
+
+    private UserProfileResponse getUserProfileResponse(UserEntity user) {
+       return UserProfileResponse.builder()
                 .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
                 .password(user.getPassword())
+                .birthDay(user.getBirthDay())
+                .currentWeight(user.getCurrentWeight())
+                .targetWeight(user.getTargetWeight())
+                .height(user.getHeight())
+                .profilePicture(user.getProfilePicture())
                 .build();
     }
 
@@ -34,8 +43,8 @@ public class UserProfileService {
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new DataNotFoundException("User not found"));
 
-//        // Check if the current password matches the user's password
-//        if (!passwordEncoder.matches(profileRequest.getCurrentPassword(), user.getPassword())) {
+        // Check if the current password matches the user's password
+        //        if (!passwordEncoder.matches(profileRequest.getCurrentPassword(), user.getPassword())) {
 //            throw new IllegalArgumentException("Invalid current password");
 //        }
 
@@ -48,17 +57,22 @@ public class UserProfileService {
         }
         if (profileRequest.getPhoneNumber() != null) {
             user.setPhoneNumber(profileRequest.getPhoneNumber());
-        }
-        // Save the updated user entity
-        UserEntity updatedUser = userRepository.save(user);
+        }if (profileRequest.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(profileRequest.getPassword()));
 
-        // Return the updated user profile response
-        return UserProfileResponse.builder()
-                .id(updatedUser.getId())
-                .name(updatedUser.getName())
-                .email(updatedUser.getEmail())
-                .phoneNumber(updatedUser.getPhoneNumber())
-                .build();
+        }if (profileRequest.getHeight() != null) {
+            user.setHeight(profileRequest.getHeight());
+        }if (profileRequest.getCurrentWeight() != null) {
+            user.setCurrentWeight(profileRequest.getCurrentWeight());
+        }if (profileRequest.getTargetWeight() != null) {
+            user.setTargetWeight(profileRequest.getTargetWeight());
+        }if (profileRequest.getBirthDay() != null) {
+            user.setBirthDay(profileRequest.getBirthDay());
+        }if (profileRequest.getProfilePicture() != null) {
+            user.setProfilePicture(profileRequest.getProfilePicture());
+        }
+        UserEntity updatedUser = userRepository.save(user);
+        return getUserProfileResponse(updatedUser);
     }
 
 }
