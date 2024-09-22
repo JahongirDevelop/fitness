@@ -5,11 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.CourseRequestDTO;
 import uni.project.fitness.dto.response.*;
-import uni.project.fitness.entity.Course;
-import uni.project.fitness.servise.CourseService;
-
+import uni.project.fitness.servise.interfaces.CourseService;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
