@@ -11,5 +11,4 @@ public class NewsRequestDTO {
     private String subTitle;
     private String description;
     private String media;
-//    private UUID categoryId;  // Assuming Category ID is used for the category association
 }
