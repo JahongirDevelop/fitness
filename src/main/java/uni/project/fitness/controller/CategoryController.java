@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.CategoryRequestDTO;
+import uni.project.fitness.dto.response.CategoryDTO;
 import uni.project.fitness.dto.response.CategoryResponseDTO;
 //import uni.project.fitness.servise.CategoryService;
 import uni.project.fitness.dto.response.CategoryResponseDTOForUser;
-import uni.project.fitness.servise.CategoryService;
+import uni.project.fitness.servise.interfaces.CategoryService;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -19,7 +21,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<String> createCategory(@RequestBody CategoryRequestDTO requestDTO) {
+    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryRequestDTO requestDTO) {
         return ResponseEntity.ok(categoryService.createCategory(requestDTO));
     }
 
