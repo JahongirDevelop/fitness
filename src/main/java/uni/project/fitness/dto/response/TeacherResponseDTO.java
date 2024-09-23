@@ -16,5 +16,4 @@ public class TeacherResponseDTO {
     private String image;
     private String workType;
     private String about;
-//    private List<UUID> trainings;
 }
