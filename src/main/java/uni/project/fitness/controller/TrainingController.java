@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.TrainingRequestDTO;
 import uni.project.fitness.dto.response.TrainingResponseDTO;
-import uni.project.fitness.servise.TrainingService;
+import uni.project.fitness.servise.interfaces.TrainingService;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,5 +51,4 @@ public class TrainingController {
     public ResponseEntity<List<TrainingResponseDTO>> getTrainingsByTeacher(@PathVariable UUID teacherId) {
         return ResponseEntity.ok(trainingService.getTrainingsByTeacher(teacherId));
     }
-
 }
