@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.response.CourseResponseDTO;
 import uni.project.fitness.dto.response.UserCourseResponseDTO;
 import uni.project.fitness.entity.UserEntity;
-import uni.project.fitness.servise.CourseService;
+import uni.project.fitness.servise.interfaces.CourseService;
+
 
 import java.util.UUID;
 
