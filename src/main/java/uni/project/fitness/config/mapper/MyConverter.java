@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import uni.project.fitness.dto.response.*;
 import uni.project.fitness.entity.*;
 import uni.project.fitness.servise.interfaces.CourseService;
-
+import uni.project.fitness.entity.icons.IconDescription;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,8 +33,9 @@ public class MyConverter {
                     .image(course.getImage())
                     .trailerVideo(course.getTrailerVideo())
                     .price(course.getPrice())
-                    .whatYouWillGet(course.getWhatYouWillGet()) // Handling IconDescription
-                    .whatToExpects(course.getWhatToExpects())
+                    .whatYouWillGet(course.getWhatYouWillGet().stream()
+                            .map(IconDescription::getIconObject)  // Convert enums to icon objects
+                            .collect(Collectors.toList()))                    .whatToExpects(course.getWhatToExpects())
                     .purpose(course.getPurpose())
                     .results(course.getResults())
                     .category(convertToCategoryDTO(course.getCategory()))
@@ -145,14 +146,27 @@ public class MyConverter {
                 .userId(completedCourse.getUser().getId())
                 .build();
     }
-
-
-
-
-
-
-
-
+    public NewsResponseDTO convertToResponseDTO(News news) {
+        return new NewsResponseDTO(
+                news.getId(),
+                news.getTitle(),
+                news.getSubTitle(),
+                news.getDescription(),
+                news.getMedia()
+        );
+    }
+    public ProgressResponseDTO convertToResponseDTO(Progress progress) {
+        return ProgressResponseDTO.builder()
+                .id(progress.getId())
+                .pictures(progress.getPictures())
+                .chest(progress.getChest())
+                .hips(progress.getHips())
+                .waist(progress.getWaist())
+                .weight(progress.getWeight())
+                .userId(progress.getUser().getId())
+                .date(progress.getCreatedDate().toLocalDate())
+                .build();
+    }
 }
 
 
