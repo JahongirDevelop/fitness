@@ -6,11 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.TeacherRequestDTO;
 import uni.project.fitness.dto.response.TeacherResponseDTO;
-import uni.project.fitness.servise.TeacherService;
-
+import uni.project.fitness.servise.interfaces.TeacherService;
 import java.util.List;
 import java.util.UUID;
-
 @RestController
 @RequestMapping("/api/teachers")
 @RequiredArgsConstructor
@@ -43,4 +41,3 @@ public class TeacherController {
         return ResponseEntity.ok(teacherService.getAllTeachers());
     }
 }
-
