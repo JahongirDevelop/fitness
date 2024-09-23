@@ -11,5 +11,4 @@ public class NewsResponseDTO {
     private String subTitle;
     private String description;
     private String media;
-//    private CategoryDTO category;  // Assuming you need a DTO for Category as well
 }
