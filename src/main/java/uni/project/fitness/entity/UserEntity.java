@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import uni.project.fitness.entity.enums.UserRole;
-import uni.project.fitness.subscription.Subscription;
 
 import java.time.LocalDate;
 import java.util.Collection;
