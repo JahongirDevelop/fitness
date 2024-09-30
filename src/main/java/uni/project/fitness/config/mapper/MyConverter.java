@@ -35,7 +35,8 @@ public class MyConverter {
                     .price(course.getPrice())
                     .whatYouWillGet(course.getWhatYouWillGet().stream()
                             .map(IconDescription::getIconObject)  // Convert enums to icon objects
-                            .collect(Collectors.toList()))                    .whatToExpects(course.getWhatToExpects())
+                            .collect(Collectors.toList()))
+                    .whatToExpects(course.getWhatToExpects())
                     .purpose(course.getPurpose())
                     .results(course.getResults())
                     .category(convertToCategoryDTO(course.getCategory()))
@@ -142,7 +143,7 @@ public class MyConverter {
     public CompletedCourseResponseDTO convertToCompletedCourseResponseDTO(CompletedCourse completedCourse) {
         return CompletedCourseResponseDTO.builder()
                 .id(completedCourse.getId())
-                .courseId(completedCourse.getCourse().getId())
+                .course(convertToResponseDTO(completedCourse.getCourse()))
                 .userId(completedCourse.getUser().getId())
                 .build();
     }
