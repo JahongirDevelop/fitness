@@ -1,4 +1,4 @@
-package uni.project.fitness.servise;
+package uni.project.fitness.servise.implement;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -8,6 +8,7 @@ import uni.project.fitness.dto.response.NutritionResponseDTO;
 import uni.project.fitness.entity.Nutrition;
 import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.repository.NutritionRepository;
+import uni.project.fitness.servise.interfaces.NutritionService;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,12 +16,11 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class NutritionService {
+public class NutritionServiceImpl implements NutritionService {
 
     private final NutritionRepository nutritionRepository;
     private final ModelMapper modelMapper;
-
-    // Create a new nutrition entry
+    @Override
     public NutritionResponseDTO createNutrition(NutritionRequestDTO requestDTO) {
         Nutrition nutrition = modelMapper.map(requestDTO, Nutrition.class);
         Nutrition savedNutrition = nutritionRepository.save(nutrition);
@@ -28,21 +28,17 @@ public class NutritionService {
         responseDTO.setId(savedNutrition.getId());
         return responseDTO;
     }
-
-    // Get a nutrition entry by ID
+    @Override
     public NutritionResponseDTO getNutritionById(UUID id) {
         Nutrition nutrition = nutritionRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("Nutrition not found with ID: " + id));
         return modelMapper.map(nutrition, NutritionResponseDTO.class);
     }
-
-    // Get all nutrition entries
-    public List<NutritionResponseDTO> getAllNutritions() {
+    @Override
+    public List<NutritionResponseDTO> getAllNutrition() {
         return nutritionRepository.findAll().stream()
                 .map(nutrition -> {
-                    // Map the Nutrition entity to the DTO
                     NutritionResponseDTO dto = modelMapper.map(nutrition, NutritionResponseDTO.class);
-                    // Set description directly as it is now a single text field
                     dto.setDescription(nutrition.getDescription());
                     return dto;
                 })
@@ -50,13 +46,11 @@ public class NutritionService {
     }
 
 
-
-    // Update an existing nutrition entry
+    @Override
     public NutritionResponseDTO updateNutrition(UUID id, NutritionRequestDTO requestDTO) {
         Nutrition existingNutrition = nutritionRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("Nutrition not found with ID: " + id));
 
-        // Update fields
         existingNutrition.setTitle(requestDTO.getTitle());
         existingNutrition.setSubTitle(requestDTO.getSubTitle());
         existingNutrition.setImage(requestDTO.getImage());
@@ -65,8 +59,7 @@ public class NutritionService {
         Nutrition updatedNutrition = nutritionRepository.save(existingNutrition);
         return modelMapper.map(updatedNutrition, NutritionResponseDTO.class);
     }
-
-    // Delete a nutrition entry by ID
+    @Override
     public void deleteNutrition(UUID id) {
         if (!nutritionRepository.existsById(id)) {
             throw new DataNotFoundException("Nutrition not found with ID: " + id);
