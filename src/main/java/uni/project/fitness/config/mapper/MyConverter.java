@@ -143,7 +143,7 @@ public class MyConverter {
     public CompletedCourseResponseDTO convertToCompletedCourseResponseDTO(CompletedCourse completedCourse) {
         return CompletedCourseResponseDTO.builder()
                 .id(completedCourse.getId())
-                .course(convertToResponseDTO(completedCourse.getCourse()))
+                .courseId(completedCourse.getId())
                 .userId(completedCourse.getUser().getId())
                 .build();
     }
