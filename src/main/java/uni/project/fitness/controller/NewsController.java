@@ -4,16 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.NewsRequestDTO;
-import uni.project.fitness.dto.response.CategoryDTO;
 import uni.project.fitness.dto.response.NewsResponseDTO;
-import uni.project.fitness.entity.Category;
-import uni.project.fitness.entity.News;
-import uni.project.fitness.servise.NewsService;
-
+import uni.project.fitness.servise.interfaces.NewsService;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/news")
