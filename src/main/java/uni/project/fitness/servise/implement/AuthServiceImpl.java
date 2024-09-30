@@ -1,4 +1,4 @@
-package uni.project.fitness.servise;
+package uni.project.fitness.servise.implement;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -18,18 +18,20 @@ import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.exception.ErrorDTO;
 import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.entity.enums.UserRole;
+import uni.project.fitness.servise.interfaces.AuthService;
+
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
 
     private AuthenticationManager authenticationManager;
-
+    @Override
     public ErrorDTO addUser(SignUp signUp) {
         if (userRepository.existsByEmail(signUp.getEmail())) {
             throw new DataAlreadyExistsException("This email already exists: " + signUp.getEmail());
@@ -50,7 +52,7 @@ public class AuthService {
 //                .phoneNumber(user.getPhoneNumber())
 //                .build();
     }
-
+    @Override
     public JwtResponse signIn(AuthDto dto) {
         UserEntity user = userRepository.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new DataNotFoundException("User not found"));
@@ -63,7 +65,7 @@ public class AuthService {
             throw new AuthenticationCredentialsNotFoundException("Invalid credentials");
         }
     }
-
+    @Override
     public JwtResponse refreshToken(String refreshToken) {
         Jws<Claims> claimsJws = jwtService.extractToken(refreshToken);
         String userId = claimsJws.getBody().getSubject();

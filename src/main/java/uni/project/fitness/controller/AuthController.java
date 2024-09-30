@@ -9,7 +9,7 @@ import uni.project.fitness.config.security.JwtResponse;
 import uni.project.fitness.dto.auth.AuthDto;
 import uni.project.fitness.dto.auth.SignUp;
 import uni.project.fitness.exception.ErrorDTO;
-import uni.project.fitness.servise.AuthService;
+import uni.project.fitness.servise.interfaces.AuthService;
 
 @RestController
 @RequiredArgsConstructor
