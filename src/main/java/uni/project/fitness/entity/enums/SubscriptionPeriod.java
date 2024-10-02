@@ -1,4 +1,4 @@
-package uni.project.fitness.subscription;
+package uni.project.fitness.entity.enums;
 
 import java.time.Duration;
 
