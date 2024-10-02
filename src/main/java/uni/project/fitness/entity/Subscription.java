@@ -1,10 +1,9 @@
-package uni.project.fitness.subscription;
+package uni.project.fitness.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import uni.project.fitness.entity.BaseEntity;
-import uni.project.fitness.entity.Course;
-import uni.project.fitness.entity.UserEntity;
+import uni.project.fitness.entity.enums.SubscriptionPeriod;
+import uni.project.fitness.entity.enums.SubscriptionStatus;
 
 import java.time.LocalDate;
 
