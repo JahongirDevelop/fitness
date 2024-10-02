@@ -1,6 +1,9 @@
-package uni.project.fitness.subscription;
+package uni.project.fitness.dto.response;
 
 import lombok.*;
+import uni.project.fitness.entity.enums.SubscriptionPeriod;
+import uni.project.fitness.entity.enums.SubscriptionStatus;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
