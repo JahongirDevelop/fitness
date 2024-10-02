@@ -1,15 +1,12 @@
-package uni.project.fitness.subscription;
+package uni.project.fitness.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import uni.project.fitness.dto.response.CourseResponseDTO;
-import uni.project.fitness.dto.response.UserCourseResponseDTO;
-import uni.project.fitness.entity.UserEntity;
 import uni.project.fitness.servise.interfaces.CourseService;
-
-
+import uni.project.fitness.dto.response.SubscriptionDTO;
+import uni.project.fitness.entity.enums.SubscriptionPeriod;
+import uni.project.fitness.servise.interfaces.SubscriptionService;
 import java.util.UUID;
 
 @RestController
