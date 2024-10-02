@@ -6,8 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.ProgressCreateDTO;
 import uni.project.fitness.dto.response.ProgressResponseDTO;
-import uni.project.fitness.servise.ProgressService;
-
+import uni.project.fitness.servise.interfaces.ProgressService;
 import java.util.List;
 import java.util.UUID;
 
