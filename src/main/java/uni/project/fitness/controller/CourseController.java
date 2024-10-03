@@ -1,5 +1,4 @@
 package uni.project.fitness.controller;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +7,6 @@ import uni.project.fitness.dto.response.*;
 import uni.project.fitness.servise.interfaces.CourseService;
 import java.util.List;
 import java.util.UUID;
-
 @RestController
 @RequestMapping("/api/courses")
 @RequiredArgsConstructor
@@ -50,8 +48,4 @@ public class CourseController {
     public List<CourseTrailerDTO> getCourseIdsAndTrailerImages() {
         return courseService.getAllCourseIdsAndTrailerImages();
     }
-
-
-
-
 }
