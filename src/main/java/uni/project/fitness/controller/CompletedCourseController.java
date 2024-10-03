@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.response.CompletedCourseRequestDTO;
 import uni.project.fitness.dto.response.CompletedCourseResponseDTO;
 import uni.project.fitness.servise.interfaces.CompletedCourseService;
-
 import java.util.List;
 import java.util.UUID;
 @RestController
