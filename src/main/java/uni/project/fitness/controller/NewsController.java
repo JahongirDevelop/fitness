@@ -1,5 +1,4 @@
 package uni.project.fitness.controller;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +7,6 @@ import uni.project.fitness.dto.response.NewsResponseDTO;
 import uni.project.fitness.servise.interfaces.NewsService;
 import java.util.List;
 import java.util.UUID;
-
 @RestController
 @RequestMapping("/api/news")
 @RequiredArgsConstructor
@@ -38,7 +36,6 @@ public class NewsController {
         NewsResponseDTO updatedNews = newsService.update(id, newsRequest);
         return ResponseEntity.ok(updatedNews);
     }
-
     @DeleteMapping("/delete-news/{id}")
     public ResponseEntity<Void> deleteNews(@PathVariable UUID id) {
         newsService.deleteById(id);
