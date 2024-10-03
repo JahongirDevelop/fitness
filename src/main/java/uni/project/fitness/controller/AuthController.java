@@ -1,5 +1,4 @@
 package uni.project.fitness.controller;
-
 import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,6 @@ import uni.project.fitness.dto.auth.AuthDto;
 import uni.project.fitness.dto.auth.SignUp;
 import uni.project.fitness.exception.ErrorDTO;
 import uni.project.fitness.servise.interfaces.AuthService;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("auth")
@@ -34,10 +32,5 @@ public class AuthController {
     public JwtResponse refresh(@RequestBody String refreshToken) {
         return authService.refreshToken(refreshToken);
     }
-
-//    @GetMapping("/get-test")
-//    public String test(){
-//        return "Working";
-//    }
 }
 
