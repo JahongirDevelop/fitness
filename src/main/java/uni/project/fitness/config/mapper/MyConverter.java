@@ -1,5 +1,4 @@
 package uni.project.fitness.config.mapper;
-
 import org.springframework.stereotype.Component;
 import uni.project.fitness.dto.response.*;
 import uni.project.fitness.entity.*;
@@ -8,7 +7,6 @@ import uni.project.fitness.entity.icons.IconDescription;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Component
 public class MyConverter {
         public CategoryResponseDTO convertToResponseDTO(Category category) {
