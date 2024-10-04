@@ -1,7 +1,5 @@
 package uni.project.fitness.controller;
-
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.TeacherRequestDTO;
@@ -24,7 +22,6 @@ public class TeacherController {
     public ResponseEntity<TeacherResponseDTO> updateTeacher(@PathVariable UUID id, @RequestBody TeacherRequestDTO requestDTO) {
         return ResponseEntity.ok(teacherService.updateTeacher(id, requestDTO));
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTeacher(@PathVariable UUID id) {
         teacherService.deleteTeacher(id);
