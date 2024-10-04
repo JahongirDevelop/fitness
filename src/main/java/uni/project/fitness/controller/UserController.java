@@ -1,5 +1,4 @@
 package uni.project.fitness.controller;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,18 +34,14 @@ public class UserController {
         UserResponse userResponse = userService.updateUserRole(userId, role);
         return ResponseEntity.ok(userResponse);
     }
-
     @GetMapping("/get-current-user-role")
     public Object getCurrentUser2(Authentication authentication) {
         return authentication.getAuthorities();
     }
-
-
     @GetMapping("/get-current-user-id")
     public Object getCurrentUser4(Authentication authentication) {
         return authentication.getName();
     }
-
     @GetMapping("/get-all-users")
     public ResponseEntity<List<UserResponse>> getAllUsers() {
         return ResponseEntity.ok(userService.getAll());
