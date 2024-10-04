@@ -1,5 +1,4 @@
 package uni.project.fitness.controller;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,13 +8,11 @@ import uni.project.fitness.dto.response.ProgressResponseDTO;
 import uni.project.fitness.servise.interfaces.ProgressService;
 import java.util.List;
 import java.util.UUID;
-
 @RestController
 @RequestMapping("/api/progress")
 @RequiredArgsConstructor
 public class ProgressController {
     private final ProgressService progressService;
-
     @GetMapping
     public ResponseEntity<List<ProgressResponseDTO>> getAllProgresses() {
         return new ResponseEntity<>(progressService.getAllProgresses(), HttpStatus.OK);
@@ -25,7 +22,6 @@ public class ProgressController {
     public ResponseEntity<ProgressResponseDTO> getProgressById(@PathVariable UUID id) {
         return new ResponseEntity<>(progressService.getProgressById(id), HttpStatus.OK);
     }
-
     @PostMapping
     public ResponseEntity<ProgressResponseDTO> createProgress(@RequestBody ProgressCreateDTO progressCreateDTO) {
         return new ResponseEntity<>(progressService.createProgress(progressCreateDTO), HttpStatus.CREATED);
@@ -41,7 +37,6 @@ public class ProgressController {
         progressService.deleteProgress(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
     @GetMapping("/get-user-progresses/{userId}")
     public ResponseEntity<List<ProgressResponseDTO>> getProgressByUserId(@PathVariable UUID userId) {
         List<ProgressResponseDTO> progressDTOList = progressService.getProgressByUserId(userId);
