@@ -1,5 +1,4 @@
 package uni.project.fitness.controller;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,14 +7,11 @@ import uni.project.fitness.dto.response.SubscriptionDTO;
 import uni.project.fitness.entity.enums.SubscriptionPeriod;
 import uni.project.fitness.servise.interfaces.SubscriptionService;
 import java.util.UUID;
-
 @RestController
 @RequestMapping("/api/subscriptions")
 @RequiredArgsConstructor
 public class SubscriptionController {
     private final SubscriptionService subscriptionService;
-    private final CourseService courseService;
-
     @PostMapping("/subscribe")
     public ResponseEntity<SubscriptionDTO> subscribe(@RequestParam UUID userId, @RequestParam UUID courseId, @RequestParam SubscriptionPeriod period) {
         SubscriptionDTO subscriptionDTO = subscriptionService.createSubscription(userId, courseId, period);
