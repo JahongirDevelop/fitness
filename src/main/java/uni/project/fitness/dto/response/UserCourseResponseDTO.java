@@ -25,7 +25,6 @@ public class UserCourseResponseDTO  {
     private String purpose;
     private List<String> results;
     private CategoryDTO category;
-    private Boolean isAccessible;
-    // True if the user has an active subscription
+    private Boolean isAccessible; // True if the user has an active subscription
 
 }
