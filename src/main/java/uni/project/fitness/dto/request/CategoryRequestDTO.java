@@ -14,5 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CategoryRequestDTO {
     private String name;
+    private UUID parentCategoryId; // Set this to null for top-level categories
 }
+
 
