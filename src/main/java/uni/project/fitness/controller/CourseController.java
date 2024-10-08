@@ -39,7 +39,7 @@ public class CourseController {
         return ResponseEntity.ok(courseService.getAllCourses());
     }
 
-    @GetMapping("/get-all-by-category/{categoryId}")
+    @GetMapping("/get-all-by-course/{categoryId}")
     public ResponseEntity<List<CourseResponseDTO>> getCoursesByCategory(@PathVariable UUID categoryId) {
         return ResponseEntity.ok(courseService.getCoursesByCategory(categoryId));
     }
