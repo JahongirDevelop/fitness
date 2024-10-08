@@ -15,6 +15,9 @@ import java.util.UUID;
 public class CategoryResponseDTO {
     private UUID id;
     private String name;
-    private List<CourseResponseDTO> courses;
+    private UUID parentCategoryId; // ID of the parent category (if any)
+    private List<CategoryResponseDTO> subcategories; // For nested subcategories
+    private List<CourseResponseDTO> courses; // List of courses in the category
 }
+
 
