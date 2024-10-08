@@ -38,45 +38,29 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.getCategoryById(id));
     }
 
-    @GetMapping
-    public ResponseEntity<List<CategoryResponseDTO>> getAllCategories() {
-        return ResponseEntity.ok(categoryService.getAllCategories());
-    }
+//    @GetMapping
+//    public ResponseEntity<List<CategoryResponseDTO>> getAllCategories() {
+//        return ResponseEntity.ok(categoryService.getAllCategories());
+//    }
     @GetMapping("/get-all-categories-for-user/{userId}")
     public ResponseEntity<List<CategoryResponseDTOForUser>> getAllCoursesForUser(@PathVariable UUID userId) {
         return ResponseEntity.ok(categoryService.getAllCategoriesForUser(userId));
     }
-
-//    @GetMapping("/getTopLevel")
-//    public ResponseEntity<List<CategoryResponseDTO>> getTopLevelCategories() {
-//        // This returns the top-level categories with subcategories and courses in a single DTO
-//        return ResponseEntity.ok(categoryService.getTopLevelCategories());
-//    }
-
-
-
-
-
-
-
     @GetMapping("/top")
     public List<CategoryResponseDTO> getTopLevelCategories() {
         return categoryService.getTopLevelCategories();
     }
 
+    // Endpoint to fetch subcategories of a selected top category
     @GetMapping("/{topCategoryId}/subcategories")
     public List<CategoryResponseDTO> getSubcategories(@PathVariable UUID topCategoryId) {
         return categoryService.getSubcategories(topCategoryId);
     }
 
-    @GetMapping("/{subcategoryId}/simple-categories")
-    public List<CategoryResponseDTO> getSimpleCategories(@PathVariable UUID subcategoryId) {
-        return categoryService.getSimpleCategories(subcategoryId);
-    }
-
-    @GetMapping("/{simpleCategoryId}/courses")
-    public List<CourseResponseDTO> getCoursesOfSimpleCategory(@PathVariable UUID simpleCategoryId) {
-        return categoryService.getCoursesOfSimpleCategory(simpleCategoryId);
+    // Endpoint to fetch courses of a selected subcategory
+    @GetMapping("/subcategories/{subcategoryId}/courses")
+    public List<CourseResponseDTO> getCoursesForSubcategory(@PathVariable UUID subcategoryId) {
+        return categoryService.getCoursesForSubcategory(subcategoryId);
     }
 
 }

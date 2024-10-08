@@ -84,24 +84,6 @@ public class CategoryServiceImpl implements CategoryService {
                 .map(category -> converter.convertToResponseDTOForUser(category, user))
                 .collect(Collectors.toList());
     }
-//    @Override
-//    public List<CategoryResponseDTO> getTopLevelCategories() {
-//        // Fetch top-level categories that have no parent (parentCategory is null)
-//        List<Category> topLevelCategories = categoryRepository.findByParentCategoryIsNull();
-//
-//        // Convert the top-level categories and their nested subcategories into DTOs
-//        return topLevelCategories.stream()
-//                .map(this::convertToResponseDTOForTopLevel)
-//                .collect(Collectors.toList());
-//    }
-//
-//    // Helper method for single-argument mapping of top-level categories
-//    private CategoryResponseDTO convertToResponseDTOForTopLevel(Category category) {
-//        // Use the main conversion method with `includeSubcategories` set to true for top-level categories
-//        return convertToResponseDTOWithSubcategories(category, true);
-//    }
-
-
     private CategoryResponseDTO convertToResponseDTOWithSubcategories(Category category, boolean includeSubcategories) {
         CategoryResponseDTO responseDTO = new CategoryResponseDTO();
         responseDTO.setId(category.getId());
@@ -129,22 +111,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 
-
-    @Override
-    public List<CategoryResponseDTO> getTopLevelCategories() {
-        List<Category> topLevelCategories = categoryRepository.findByParentCategoryIsNull();
-        return topLevelCategories.stream()
-                .map(category -> convertToResponseDTO(category, false))
-                .collect(Collectors.toList());
-    }
-    @Override
-    public List<CategoryResponseDTO> getSubcategories(UUID topCategoryId) {
-        Category topCategory = categoryRepository.findById(topCategoryId)
-                .orElseThrow(() -> new DataNotFoundException("Top category not found"));
-        return topCategory.getSubcategories().stream()
-                .map(subcategory -> convertToResponseDTO(subcategory, false))
-                .collect(Collectors.toList());
-    }
     @Override
     public List<CategoryResponseDTO> getSimpleCategories(UUID subcategoryId) {
         Category subcategory = categoryRepository.findById(subcategoryId)
@@ -183,5 +149,52 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 
+
+
+
+    // Fetch all top-level categories
+    @Override
+    public List<CategoryResponseDTO> getTopLevelCategories() {
+        List<Category> topLevelCategories = categoryRepository.findByParentCategoryIsNull();
+        return topLevelCategories.stream()
+                .map(category -> convertToResponseDTO(category))
+                .collect(Collectors.toList());
+    }
+
+    // Fetch subcategories for a selected top category
+    @Override
+    public List<CategoryResponseDTO> getSubcategories(UUID topCategoryId) {
+        Category topCategory = categoryRepository.findById(topCategoryId)
+                .orElseThrow(() -> new DataNotFoundException("Top category not found"));
+
+        return topCategory.getSubcategories().stream()
+                .map(this::convertToResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    // Fetch courses for a selected subcategory
+    @Override
+    public List<CourseResponseDTO> getCoursesForSubcategory(UUID subcategoryId) {
+        Category subcategory = categoryRepository.findById(subcategoryId)
+                .orElseThrow(() -> new DataNotFoundException("Subcategory not found"));
+
+        return subcategory.getCourses().stream()
+                .map(converter::convertToResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    // Convert Category to CategoryResponseDTO
+    private CategoryResponseDTO convertToResponseDTO(Category category) {
+        CategoryResponseDTO responseDTO = new CategoryResponseDTO();
+        responseDTO.setId(category.getId());
+        responseDTO.setName(category.getName());
+        responseDTO.setParentCategoryId(category.getParentCategory() != null ? category.getParentCategory().getId() : null);
+
+        // Set subcategories to an empty list to avoid null
+        responseDTO.setSubcategories(new ArrayList<>());
+        responseDTO.setCourses(new ArrayList<>()); // Set courses to an empty list to avoid null
+
+        return responseDTO;
+    }
 }
 

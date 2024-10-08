@@ -18,5 +18,8 @@ public interface CategoryService {
     List<CategoryResponseDTO> getSimpleCategories(UUID subcategoryId);
 
     List<CourseResponseDTO> getCoursesOfSimpleCategory(UUID simpleCategoryId);
+
+    // Fetch courses for a selected subcategory
+    List<CourseResponseDTO> getCoursesForSubcategory(UUID subcategoryId);
 }
 
