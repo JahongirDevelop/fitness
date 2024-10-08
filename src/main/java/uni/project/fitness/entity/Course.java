@@ -35,14 +35,11 @@ public class Course extends BaseEntity {
 
     private String purpose;
 
-//    @ElementCollection
-//    private List<String> icons;
-
     @ElementCollection
     private List<String> results;
 
     @ManyToOne
-    @JsonBackReference
+    @JoinColumn(name = "category_id")
     private Category category;
     public boolean isAccessibleForUser(UserEntity user) {
         return user.hasActiveSubscriptionForCourse(this);  // Check if user has an active subscription for this course
