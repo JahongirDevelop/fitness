@@ -166,6 +166,50 @@ public class MyConverter {
                 .date(progress.getCreatedDate().toLocalDate())
                 .build();
     }
+
+    public TopCategoryResponseDTO convertToTopCategoryResponseDTO(Category topCategory) {
+        if (topCategory == null) {
+            return null;
+        }
+
+        TopCategoryResponseDTO responseDTO = new TopCategoryResponseDTO();
+        responseDTO.setId(topCategory.getId());
+        responseDTO.setName(topCategory.getName());
+
+        // Map subcategories if the top category has subcategories associated with it
+        if (topCategory.getSubcategories() != null && !topCategory.getSubcategories().isEmpty()) {
+            List<SubCategoryResponseDTO> subCategoryDTOs = topCategory.getSubcategories().stream()
+                    .map(this::convertToSubCategoryResponseDTO) // Convert each subcategory to SubCategoryResponseDTO
+                    .collect(Collectors.toList());
+            responseDTO.setSubcategories(subCategoryDTOs);
+        }
+
+        return responseDTO;
+    }
+
+    public SubCategoryResponseDTO convertToSubCategoryResponseDTO(Category subCategory) {
+        if (subCategory == null) {
+            return null;
+        }
+
+        SubCategoryResponseDTO responseDTO = new SubCategoryResponseDTO();
+        responseDTO.setId(subCategory.getId());
+        responseDTO.setName(subCategory.getName());
+        responseDTO.setImage(subCategory.getImage()); // Assuming subcategories have an image field
+        responseDTO.setParentCategoryId(subCategory.getParentCategory().getId());
+
+        // Map courses if the subcategory has courses associated with it
+        if (subCategory.getCourses() != null && !subCategory.getCourses().isEmpty()) {
+            List<CourseResponseDTO> courseDTOs = subCategory.getCourses().stream()
+                    .map(this::convertToResponseDTO) // Convert each course to CourseResponseDTO
+                    .collect(Collectors.toList());
+            responseDTO.setCourses(courseDTOs);
+        }
+
+        return responseDTO;
+    }
+
+
 }
 
 
