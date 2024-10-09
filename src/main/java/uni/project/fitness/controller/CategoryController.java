@@ -1,12 +1,11 @@
 package uni.project.fitness.controller;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uni.project.fitness.dto.request.CategoryRequestDTO;
-import uni.project.fitness.dto.response.CategoryDTO;
-import uni.project.fitness.dto.response.CategoryResponseDTO;
-import uni.project.fitness.dto.response.CategoryResponseDTOForUser;
-import uni.project.fitness.dto.response.CourseResponseDTO;
+import uni.project.fitness.dto.request.SubCategoryRequestDTO;
+import uni.project.fitness.dto.request.TopCategoryRequestDTO;
+import uni.project.fitness.dto.response.*;
 import uni.project.fitness.servise.interfaces.CategoryService;
 import java.util.List;
 import java.util.UUID;
@@ -17,15 +16,34 @@ import java.util.UUID;
 public class CategoryController {
     private final CategoryService categoryService;
 
-    @PostMapping
-    public ResponseEntity<CategoryResponseDTO> createCategory(@RequestBody CategoryRequestDTO requestDTO) {
-        return ResponseEntity.ok(categoryService.createCategory(requestDTO));
+    // Create Top Category
+    @PostMapping("/create-topCategory")
+    public ResponseEntity<TopCategoryResponseDTO> createTopCategory(@RequestBody TopCategoryRequestDTO requestDTO) {
+        TopCategoryResponseDTO response = categoryService.createTopCategory(requestDTO);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable UUID id, @RequestBody CategoryRequestDTO requestDTO) {
-        return ResponseEntity.ok(categoryService.updateCategory(id, requestDTO));
+    // Update Top Category
+    @PutMapping("/update-topCategory/{id}")
+    public ResponseEntity<TopCategoryResponseDTO> updateTopCategory(@PathVariable UUID id, @RequestBody TopCategoryRequestDTO requestDTO) {
+        TopCategoryResponseDTO response = categoryService.updateTopCategory(id, requestDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    // Create Sub Category
+    @PostMapping("/create-subCategory")
+    public ResponseEntity<SubCategoryResponseDTO> createSubCategory(@RequestBody SubCategoryRequestDTO requestDTO) {
+        SubCategoryResponseDTO response = categoryService.createSubCategory(requestDTO);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    // Update Sub Category
+    @PutMapping("/update-subCategory/{id}")
+    public ResponseEntity<SubCategoryResponseDTO> updateSubCategory(@PathVariable UUID id, @RequestBody SubCategoryRequestDTO requestDTO) {
+        SubCategoryResponseDTO response = categoryService.updateSubCategory(id, requestDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable UUID id) {
@@ -33,27 +51,17 @@ public class CategoryController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponseDTO> getCategoryById(@PathVariable UUID id) {
-        return ResponseEntity.ok(categoryService.getCategoryById(id));
-    }
-
-//    @GetMapping
-//    public ResponseEntity<List<CategoryResponseDTO>> getAllCategories() {
-//        return ResponseEntity.ok(categoryService.getAllCategories());
-//    }
     @GetMapping("/get-all-categories-for-user/{userId}")
     public ResponseEntity<List<CategoryResponseDTOForUser>> getAllCoursesForUser(@PathVariable UUID userId) {
         return ResponseEntity.ok(categoryService.getAllCategoriesForUser(userId));
     }
     @GetMapping("/top")
-    public List<CategoryResponseDTO> getTopLevelCategories() {
+    public List<TopCategoryResponseDTO> getTopLevelCategories() {
         return categoryService.getTopLevelCategories();
     }
 
-    // Endpoint to fetch subcategories of a selected top category
     @GetMapping("/{topCategoryId}/subcategories")
-    public List<CategoryResponseDTO> getSubcategories(@PathVariable UUID topCategoryId) {
+    public List<SubCategoryResponseDTO> getSubcategories(@PathVariable UUID topCategoryId) {
         return categoryService.getSubcategories(topCategoryId);
     }
 
