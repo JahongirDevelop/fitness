@@ -21,5 +21,6 @@ public class Nutrition extends BaseEntity {
     // Store the description as a single text field in the database
     @Column(columnDefinition = "TEXT")
     private String description;
+    private String pdfLink;
 }
 
