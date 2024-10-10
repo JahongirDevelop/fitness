@@ -13,6 +13,6 @@ public interface TrainingService {
     TrainingResponseDTO getTrainingById(UUID id);
     List<TrainingResponseDTO> getAllTrainings();
     List<TrainingForCourseResponseDTO> getTrainingsByCourse(UUID courseId);
-    List<TrainingForTeacherResponseDTO> getTrainingsByTeacher(UUID teacherId);
+    List<TrainingForTeacherResponseDTO> getTrainingsByTeacher(UUID teacherId,UUID userId);
 }
 
