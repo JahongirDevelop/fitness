@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface NutritionService {
     NutritionResponseDTO createNutrition(NutritionRequestDTO requestDTO);
     NutritionResponseDTO getNutritionById(UUID id);
-    List<NutritionResponseDTO> getAllNutrition();
+    List<NutritionResponseDTO> getAllNutrition(UUID userId);
     NutritionResponseDTO updateNutrition(UUID id, NutritionRequestDTO requestDTO);
     void deleteNutrition(UUID id);
 }
