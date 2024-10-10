@@ -22,5 +22,6 @@ public class Nutrition extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
     private String pdfLink;
+
 }
 

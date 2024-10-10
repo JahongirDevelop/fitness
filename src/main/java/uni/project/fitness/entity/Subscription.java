@@ -14,28 +14,52 @@ import java.time.LocalDate;
 @Setter
 @Builder
 public class Subscription extends BaseEntity {
-
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
-    @ManyToOne
-    private Course course;  // Reference to the specific course
+    @Enumerated(EnumType.STRING)
+    private SubscriptionPeriod period;
+
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     @Enumerated(EnumType.STRING)
-    private SubscriptionPeriod period;  // Subscription period (1 MONTH, 3 MONTHS, etc.)
-
-    private LocalDate startDate;        // Subscription start date
-    private LocalDate endDate;          // Subscription end date
-
-    @Enumerated(EnumType.STRING)
-    private SubscriptionStatus status;  // ACTIVE, EXPIRED, etc.
+    private SubscriptionStatus status;
 
     public boolean isActive() {
         return status == SubscriptionStatus.ACTIVE && LocalDate.now().isBefore(endDate);
     }
 
+    // Extend subscription by the given period duration
     public void extendSubscription(SubscriptionPeriod additionalPeriod) {
         this.endDate = this.endDate.plus(additionalPeriod.getDuration());
+    }
+
+    // Determine which content is unlocked based on subscription period
+    public boolean isBasicAccess() {
+        return period == SubscriptionPeriod.ONE_MONTH_BASIC;
+    }
+
+    public boolean isFullAccess() {
+        return period == SubscriptionPeriod.ONE_MONTHS_FULL || period == SubscriptionPeriod.ONE_YEAR_FULL;
+    }
+
+    public boolean isYearlyFullAccess() {
+        return period == SubscriptionPeriod.ONE_YEAR_FULL;
+    }
+
+    // Method to check if a specific type of content is unlocked
+    public boolean isTrainingUnlocked() {
+        return isBasicAccess() || isFullAccess();
+    }
+
+    public boolean isNutritionUnlocked() {
+        return isFullAccess() || isYearlyFullAccess();
+    }
+
+    public boolean isTeacherTrainingUnlocked() {
+        return isFullAccess() || isYearlyFullAccess();
     }
 }
 
