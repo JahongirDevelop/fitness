@@ -40,6 +40,7 @@ public class NutritionServiceImpl implements NutritionService {
                 .map(nutrition -> {
                     NutritionResponseDTO dto = modelMapper.map(nutrition, NutritionResponseDTO.class);
                     dto.setDescription(nutrition.getDescription());
+                    dto.setPdfLink(nutrition.getPdfLink());
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -55,6 +56,7 @@ public class NutritionServiceImpl implements NutritionService {
         existingNutrition.setSubTitle(requestDTO.getSubTitle());
         existingNutrition.setImage(requestDTO.getImage());
         existingNutrition.setDescription(requestDTO.getDescription());
+        existingNutrition.setPdfLink(requestDTO.getPdfLink());
 
         Nutrition updatedNutrition = nutritionRepository.save(existingNutrition);
         return modelMapper.map(updatedNutrition, NutritionResponseDTO.class);
