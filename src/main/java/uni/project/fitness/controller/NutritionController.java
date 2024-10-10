@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.NutritionRequestDTO;
 import uni.project.fitness.dto.response.NutritionResponseDTO;
 import uni.project.fitness.servise.interfaces.NutritionService;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 @RestController
@@ -23,8 +25,8 @@ public class NutritionController {
         return ResponseEntity.ok(responseDTO);
     }
     @GetMapping
-    public ResponseEntity<List<NutritionResponseDTO>> getAllNutrition() {
-        List<NutritionResponseDTO> responseDTOs = nutritionService.getAllNutrition();
+    public ResponseEntity<List<NutritionResponseDTO>> getAllNutrition(Principal principal) {
+        List<NutritionResponseDTO> responseDTOs = nutritionService.getAllNutrition(UUID.fromString(principal.getName()));
         return ResponseEntity.ok(responseDTOs);
     }
     @PutMapping("/{id}")
