@@ -77,7 +77,7 @@ public class MyConverter {
                 .results(training.getResults())
                 .build();
     }
-    public TrainingForTeacherResponseDTO convertToTrainingForTeacherResponseDTO(Training training) {
+    public TrainingForTeacherResponseDTO convertToTrainingForTeacherResponseDTO(Training training, boolean isAvailable) {
 
         return TrainingForTeacherResponseDTO.builder()
                 .id(training.getId())
@@ -91,6 +91,7 @@ public class MyConverter {
                 .equipments(training.getEquipments())
                 .musclesInvolved(training.getMusclesInvolved())
                 .results(training.getResults())
+                .isAvailable(isAvailable)
                 .build();
     }
 
@@ -156,7 +157,7 @@ public class MyConverter {
                     .purpose(course.getPurpose())
                     .results(course.getResults())
                     .category(convertToCategoryDTO(course.getCategory()))
-                    .isAccessible(user.hasActiveSubscriptionForCourse(course))
+//                    .isAccessible(user.hasActiveSubscriptionForCourse(course))
                     .build();
         }
 
@@ -208,7 +209,7 @@ public class MyConverter {
         // Map subcategories if the top category has subcategories associated with it
         if (topCategory.getSubcategories() != null && !topCategory.getSubcategories().isEmpty()) {
             List<SubCategoryResponseDTO> subCategoryDTOs = topCategory.getSubcategories().stream()
-                    .map(this::convertToSubCategoryResponseDTO) // Convert each subcategory to SubCategoryResponseDTO
+                    .map(subCategory -> convertToSubCategoryResponseDTO(subCategory, false))  // Pass the boolean value
                     .collect(Collectors.toList());
             responseDTO.setSubcategories(subCategoryDTOs);
         }
@@ -216,13 +217,14 @@ public class MyConverter {
         return responseDTO;
     }
 
-    public SubCategoryResponseDTO convertToSubCategoryResponseDTO(Category subCategory) {
+    public SubCategoryResponseDTO convertToSubCategoryResponseDTO(Category subCategory, boolean isAvailable) {
         if (subCategory == null) {
             return null;
         }
 
         SubCategoryResponseDTO responseDTO = new SubCategoryResponseDTO();
         responseDTO.setId(subCategory.getId());
+        responseDTO.setIsAvailable(isAvailable);
         responseDTO.setName(subCategory.getName());
         responseDTO.setImage(subCategory.getImage()); // Assuming subcategories have an image field
         responseDTO.setParentCategoryId(subCategory.getParentCategory().getId());
