@@ -13,8 +13,8 @@ import java.util.UUID;
 public class SubscriptionController {
     private final SubscriptionService subscriptionService;
     @PostMapping("/subscribe")
-    public ResponseEntity<SubscriptionDTO> subscribe(@RequestParam UUID userId, @RequestParam UUID courseId, @RequestParam SubscriptionPeriod period) {
-        SubscriptionDTO subscriptionDTO = subscriptionService.createSubscription(userId, courseId, period);
+    public ResponseEntity<SubscriptionDTO> subscribe(@RequestParam UUID userId, @RequestParam SubscriptionPeriod period) {
+        SubscriptionDTO subscriptionDTO = subscriptionService.createSubscription(userId, period);
         return ResponseEntity.ok(subscriptionDTO);
     }
 
