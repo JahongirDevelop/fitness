@@ -7,6 +7,8 @@ import uni.project.fitness.dto.request.SubCategoryRequestDTO;
 import uni.project.fitness.dto.request.TopCategoryRequestDTO;
 import uni.project.fitness.dto.response.*;
 import uni.project.fitness.servise.interfaces.CategoryService;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -61,8 +63,8 @@ public class CategoryController {
     }
 
     @GetMapping("/{topCategoryId}/subcategories")
-    public List<SubCategoryResponseDTO> getSubcategories(@PathVariable UUID topCategoryId) {
-        return categoryService.getSubcategories(topCategoryId);
+    public List<SubCategoryResponseDTO> getSubcategories(Principal principal,  @PathVariable UUID topCategoryId) {
+        return categoryService.getSubcategories(topCategoryId, UUID.fromString(principal.getName()));
     }
 
     // Endpoint to fetch courses of a selected subcategory
