@@ -30,7 +30,6 @@ public class MyConverter {
                     .description(course.getDescription())
                     .image(course.getImage())
                     .trailerVideo(course.getTrailerVideo())
-                    .price(course.getPrice())
                     .whatYouWillGet(course.getWhatYouWillGet().stream()
                             .map(IconDescription::getIconObject)  // Convert enums to icon objects
                             .collect(Collectors.toList()))
@@ -149,7 +148,6 @@ public class MyConverter {
                     .description(course.getDescription())
                     .image(course.getImage())
                     .trailerVideo(course.getTrailerVideo())
-                    .price(course.getPrice())
                     .trainings(course.getTrainings().stream()
                             .map(this::convertToTrainingDTO)
                             .collect(Collectors.toList()))

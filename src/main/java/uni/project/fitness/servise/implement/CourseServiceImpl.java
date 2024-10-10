@@ -28,7 +28,6 @@ public class CourseServiceImpl implements CourseService {
                 .description(requestDTO.getDescription())
                 .image(requestDTO.getImage())
                 .trailerVideo(requestDTO.getTrailerVideo())
-                .price(requestDTO.getPrice())
                 .whatYouWillGet(requestDTO.getWhatYouWillGet())
                 .whatToExpects(requestDTO.getWhatToExpects())
                 .purpose(requestDTO.getPurpose())
@@ -49,7 +48,6 @@ public class CourseServiceImpl implements CourseService {
         course.setDescription(requestDTO.getDescription());
         course.setImage(requestDTO.getImage());
         course.setTrailerVideo(requestDTO.getTrailerVideo());
-        course.setPrice(requestDTO.getPrice());
         course.setWhatYouWillGet(requestDTO.getWhatYouWillGet());
         course.setWhatToExpects(requestDTO.getWhatToExpects());
         course.setPurpose(requestDTO.getPurpose());

@@ -24,7 +24,6 @@ public class Course extends BaseEntity {
     private List<Training> trainings;
 
     private String trailerVideo;
-    private Double price;
 
     @ElementCollection(targetClass = IconDescription.class)
     @Enumerated(EnumType.STRING)
