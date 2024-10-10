@@ -6,6 +6,7 @@ import uni.project.fitness.dto.request.SubCategoryRequestDTO;
 import uni.project.fitness.dto.request.TopCategoryRequestDTO;
 import uni.project.fitness.dto.response.*;
 import uni.project.fitness.entity.*;
+import uni.project.fitness.entity.enums.SubscriptionPeriod;
 import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.config.mapper.MyConverter;
 import uni.project.fitness.repository.CategoryRepository;
@@ -14,6 +15,7 @@ import uni.project.fitness.servise.interfaces.CategoryService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -63,7 +65,7 @@ public class CategoryServiceImpl implements CategoryService {
                 .build();
 
         Category savedSubCategory = categoryRepository.save(subCategory);
-        return converter.convertToSubCategoryResponseDTO(savedSubCategory);
+        return converter.convertToSubCategoryResponseDTO(savedSubCategory,false);
     }
 
     @Override
@@ -74,7 +76,7 @@ public class CategoryServiceImpl implements CategoryService {
         subCategory.setName(requestDTO.getName());
         subCategory.setImage(requestDTO.getImage());
         subCategory = categoryRepository.save(subCategory);
-        return converter.convertToSubCategoryResponseDTO(subCategory);
+        return converter.convertToSubCategoryResponseDTO(subCategory,false);
     }
 
     @Override
@@ -101,13 +103,18 @@ public class CategoryServiceImpl implements CategoryService {
 
     // Fetch subcategories for a selected top category
     @Override
-    public List<SubCategoryResponseDTO> getSubcategories(UUID topCategoryId) {
-        Category topCategory = categoryRepository.findById(topCategoryId)
-                .orElseThrow(() -> new DataNotFoundException("Top category not found"));
+    public List<SubCategoryResponseDTO> getSubcategories(UUID topCategoryId, UUID userId) {
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException("User not found"));
+        boolean isAvailable = user.getSubscription() != null;
+        List<Category> subcategories = categoryRepository.findAllByParentCategory_Id(topCategoryId)
+                .orElseThrow(() -> new DataNotFoundException("Sub categories not found"));
+        List<SubCategoryResponseDTO> subCategoryResponseDTOList = new ArrayList<>();
 
-        return topCategory.getSubcategories().stream()
-                .map(converter::convertToSubCategoryResponseDTO)
-                .collect(Collectors.toList());
+        subcategories.forEach(category -> {
+            subCategoryResponseDTOList.add(converter.convertToSubCategoryResponseDTO(category,isAvailable));
+        });
+        return  subCategoryResponseDTOList;
     }
 
     // Fetch courses for a selected subcategory
