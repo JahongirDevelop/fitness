@@ -1,13 +1,14 @@
 package uni.project.fitness.entity.enums;
 
+import lombok.Getter;
+
 import java.time.Duration;
 
+@Getter
 public enum SubscriptionPeriod {
-    ONE_DAY(Duration.ofDays(1)),
-    ONE_MONTH(Duration.ofDays(30)),
-    THREE_MONTHS(Duration.ofDays(90)),
-    SIX_MONTHS(Duration.ofDays(180)),
-    ONE_YEAR(Duration.ofDays(365));
+    ONE_MONTH_BASIC(Duration.ofDays(30)),
+    ONE_MONTHS_FULL(Duration.ofDays(30)),
+    ONE_YEAR_FULL(Duration.ofDays(365));
 
     private final Duration duration;
 
@@ -15,8 +16,6 @@ public enum SubscriptionPeriod {
         this.duration = duration;
     }
 
-    public Duration getDuration() {
-        return duration;
-    }
 }
+
 
