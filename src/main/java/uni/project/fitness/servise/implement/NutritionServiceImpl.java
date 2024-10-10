@@ -6,11 +6,15 @@ import org.springframework.stereotype.Service;
 import uni.project.fitness.dto.request.NutritionRequestDTO;
 import uni.project.fitness.dto.response.NutritionResponseDTO;
 import uni.project.fitness.entity.Nutrition;
+import uni.project.fitness.entity.UserEntity;
+import uni.project.fitness.entity.enums.SubscriptionPeriod;
 import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.repository.NutritionRepository;
+import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.servise.interfaces.NutritionService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -20,6 +24,7 @@ public class NutritionServiceImpl implements NutritionService {
 
     private final NutritionRepository nutritionRepository;
     private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
     @Override
     public NutritionResponseDTO createNutrition(NutritionRequestDTO requestDTO) {
         Nutrition nutrition = modelMapper.map(requestDTO, Nutrition.class);
@@ -35,12 +40,16 @@ public class NutritionServiceImpl implements NutritionService {
         return modelMapper.map(nutrition, NutritionResponseDTO.class);
     }
     @Override
-    public List<NutritionResponseDTO> getAllNutrition() {
+    public List<NutritionResponseDTO> getAllNutrition(UUID userId) {
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException("User not found!"));
+        boolean isAvailable = (user.getSubscription().getPeriod()!=SubscriptionPeriod.ONE_MONTH_BASIC)&&(user.getSubscription().getPeriod()!=null);
         return nutritionRepository.findAll().stream()
                 .map(nutrition -> {
                     NutritionResponseDTO dto = modelMapper.map(nutrition, NutritionResponseDTO.class);
                     dto.setDescription(nutrition.getDescription());
                     dto.setPdfLink(nutrition.getPdfLink());
+                    dto.setIsAvailable(isAvailable);
                     return dto;
                 })
                 .collect(Collectors.toList());
