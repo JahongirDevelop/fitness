@@ -47,7 +47,6 @@ public class MyConverter {
         }
 
         public TrainingResponseDTO convertToResponseDTO(Training training) {
-
             return TrainingResponseDTO.builder()
                     .id(training.getId())
                     .title(training.getTitle())
@@ -63,6 +62,38 @@ public class MyConverter {
                     .results(training.getResults())
                     .build();
         }
+    public TrainingForCourseResponseDTO convertToTrainingForCourseResponseDTO(Training training) {
+
+        return TrainingForCourseResponseDTO.builder()
+                .id(training.getId())
+                .title(training.getTitle())
+                .course(convertToCourseDTO(training.getCourse()))
+                .description(training.getDescription())
+                .shortDescription(training.getShortDescription())
+                .image(training.getImage())
+                .video(training.getVideo())
+                .importantInfo(training.getImportantInfo())
+                .equipments(training.getEquipments())
+                .musclesInvolved(training.getMusclesInvolved())
+                .results(training.getResults())
+                .build();
+    }
+    public TrainingForTeacherResponseDTO convertToTrainingForTeacherResponseDTO(Training training) {
+
+        return TrainingForTeacherResponseDTO.builder()
+                .id(training.getId())
+                .title(training.getTitle())
+                .teacher(convertToResponseDTO(training.getTeacher()))
+                .description(training.getDescription())
+                .shortDescription(training.getShortDescription())
+                .image(training.getImage())
+                .video(training.getVideo())
+                .importantInfo(training.getImportantInfo())
+                .equipments(training.getEquipments())
+                .musclesInvolved(training.getMusclesInvolved())
+                .results(training.getResults())
+                .build();
+    }
 
         public TeacherResponseDTO convertToResponseDTO(Teacher teacher) {
             return TeacherResponseDTO.builder()
