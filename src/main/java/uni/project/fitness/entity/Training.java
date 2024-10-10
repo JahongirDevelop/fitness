@@ -39,4 +39,13 @@ public class Training extends BaseEntity {
 
     @ElementCollection
     private List<String> results; // nima natijalar olasiz bu treningda
+    public boolean isAccessibleForUser(Subscription subscription) {
+        if (course != null) {
+            return subscription.isTrainingUnlocked();  // Unlocked for course-linked trainings
+        } else if (teacher != null) {
+            return subscription.isTeacherTrainingUnlocked();  // Unlocked for teacher-linked trainings
+        }
+        return false; // Locked by default
+    }
+
 }
