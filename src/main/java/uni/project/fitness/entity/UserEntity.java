@@ -34,13 +34,14 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Subscription> subscriptions;  // User can have multiple course subscriptions
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "subscription_id", referencedColumnName = "id")
+    private Subscription subscription;
 
-    public boolean hasActiveSubscriptionForCourse(Course course) {
-        return subscriptions.stream()
-                .anyMatch(subscription -> subscription.getCourse().equals(course) && subscription.isActive());
-    }
+//    public boolean hasActiveSubscriptionForCourse(Course course) {
+//        return subscriptions.stream()
+//                .anyMatch(subscription -> subscription.getCourse().equals(course) && subscription.isActive());
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
