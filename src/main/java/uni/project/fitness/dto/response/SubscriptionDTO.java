@@ -14,7 +14,6 @@ import java.util.UUID;
 public class SubscriptionDTO {
     private UUID id;
     private UUID userId;
-    private UUID courseId;
     private SubscriptionPeriod period;
     private LocalDate startDate;
     private LocalDate endDate;
