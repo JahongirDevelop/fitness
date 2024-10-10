@@ -8,13 +8,19 @@ import uni.project.fitness.dto.response.*;
 import uni.project.fitness.entity.Course;
 import uni.project.fitness.entity.Teacher;
 import uni.project.fitness.entity.Training;
+import uni.project.fitness.entity.UserEntity;
+import uni.project.fitness.entity.enums.SubscriptionPeriod;
 import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.config.mapper.MyConverter;
 import uni.project.fitness.repository.CourseRepository;
 import uni.project.fitness.repository.TeacherRepository;
 import uni.project.fitness.repository.TrainingRepository;
+import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.servise.interfaces.TrainingService;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -25,6 +31,7 @@ public class TrainingServiceImpl implements TrainingService {
     private final CourseRepository courseRepository;
     private final TeacherRepository teacherRepository; // Make sure to inject this
     private final MyConverter converter;
+    private final UserRepository userRepository;
 
     @Override
     public TrainingForCourseResponseDTO createTrainingForCourse(TrainingForCourseRequestDTO requestDTO) {
@@ -60,7 +67,7 @@ public class TrainingServiceImpl implements TrainingService {
                 .results(requestDTO.getResults())
                 .build();
         training = trainingRepository.save(training);
-        return converter.convertToTrainingForTeacherResponseDTO(training);
+        return converter.convertToTrainingForTeacherResponseDTO(training,true);
     }
 
     @Override
@@ -97,7 +104,7 @@ public class TrainingServiceImpl implements TrainingService {
         training.setMusclesInvolved(requestDTO.getMusclesInvolved());
         training.setResults(requestDTO.getResults());
         training = trainingRepository.save(training);
-        return converter.convertToTrainingForTeacherResponseDTO(training);
+        return converter.convertToTrainingForTeacherResponseDTO(training,true);
     }
 
     @Override
@@ -130,12 +137,18 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public List<TrainingForTeacherResponseDTO> getTrainingsByTeacher(UUID teacherId) {
+    public List<TrainingForTeacherResponseDTO> getTrainingsByTeacher(UUID teacherId, UUID userId) {
         Teacher teacher = teacherRepository.findById(teacherId)
                 .orElseThrow(() -> new DataNotFoundException("Teacher not found with id: " + teacherId));
-        return trainingRepository.findByTeacher(teacher).stream()
-                .map(converter::convertToTrainingForTeacherResponseDTO)
-                .collect(Collectors.toList());
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException("User not found!"));
+        List<Training> trainingList = trainingRepository.findByTeacher(teacher);
+        boolean isAvailable = (user.getSubscription().getPeriod()!=SubscriptionPeriod.ONE_MONTH_BASIC)&&(user.getSubscription().getPeriod()!=null);
+        List<TrainingForTeacherResponseDTO> teacherResponseDTOList = new ArrayList<>();
+        trainingList.forEach(training ->{
+            teacherResponseDTOList.add(converter.convertToTrainingForTeacherResponseDTO(training,isAvailable));
+        });
+        return teacherResponseDTOList;
     }
 }
 
