@@ -22,4 +22,5 @@ public class TrainingForTeacherResponseDTO {
     private List<String> equipments;
     private List<String> musclesInvolved;
     private List<String> results;
+    private Boolean isAvailable;
 }
