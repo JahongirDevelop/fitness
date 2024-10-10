@@ -1,4 +1,4 @@
-package uni.project.fitness.dto.request;
+package uni.project.fitness.dto.response;
 
 import lombok.*;
 
@@ -10,10 +10,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TrainingRequestDTO {
+public class TrainingForCourseResponseDTO {
+    private UUID id;
     private String title;
-    private UUID teacherId; // Teacher ID
-    private UUID courseId;
+    private CourseDTO course;
     private String description;
     private String shortDescription;
     private String image;
