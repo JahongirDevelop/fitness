@@ -14,5 +14,6 @@ public class NutritionRequestDTO {
     private String subTitle;
     private String image;
     private String description;
+    private String pdfLink;
 }
 

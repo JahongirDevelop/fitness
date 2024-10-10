@@ -16,5 +16,6 @@ public class NutritionResponseDTO {
     private String subTitle;
     private String image;
     private String description;
+    private String pdfLink;
 }
 
