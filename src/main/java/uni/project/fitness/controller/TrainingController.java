@@ -8,6 +8,8 @@ import uni.project.fitness.dto.response.TrainingForCourseResponseDTO;
 import uni.project.fitness.dto.response.TrainingForTeacherResponseDTO;
 import uni.project.fitness.dto.response.TrainingResponseDTO;
 import uni.project.fitness.servise.interfaces.TrainingService;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 @RestController
@@ -55,7 +57,7 @@ public class TrainingController {
         return ResponseEntity.ok(trainingService.getTrainingsByCourse(courseId));
     }
     @GetMapping("/get-all-by-teacher/{teacherId}")
-    public ResponseEntity<List<TrainingForTeacherResponseDTO>> getTrainingsByTeacher(@PathVariable UUID teacherId) {
-        return ResponseEntity.ok(trainingService.getTrainingsByTeacher(teacherId));
+    public ResponseEntity<List<TrainingForTeacherResponseDTO>> getTrainingsByTeacher(Principal principal, @PathVariable UUID teacherId) {
+        return ResponseEntity.ok(trainingService.getTrainingsByTeacher(teacherId, UUID.fromString(principal.getName())));
     }
 }
