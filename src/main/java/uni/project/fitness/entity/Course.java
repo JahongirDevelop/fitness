@@ -40,7 +40,7 @@ public class Course extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    public boolean isAccessibleForUser(UserEntity user) {
-        return user.hasActiveSubscriptionForCourse(this);  // Check if user has an active subscription for this course
+    public boolean isAccessibleForUser(Subscription subscription) {
+        return subscription.isTrainingUnlocked();  // Courses are accessible if the subscription unlocks trainings
     }
 }
