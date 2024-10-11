@@ -43,7 +43,9 @@ public class NutritionServiceImpl implements NutritionService {
     public List<NutritionResponseDTO> getAllNutrition(UUID userId) {
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new DataNotFoundException("User not found!"));
-        boolean isAvailable = (user.getSubscription().getPeriod()!=SubscriptionPeriod.ONE_MONTH_BASIC)&&(user.getSubscription().getPeriod()!=null);
+        boolean isAvailable = user.getSubscription() != null &&
+                user.getSubscription().getPeriod() != SubscriptionPeriod.ONE_MONTH_BASIC;
+
         return nutritionRepository.findAll().stream()
                 .map(nutrition -> {
                     NutritionResponseDTO dto = modelMapper.map(nutrition, NutritionResponseDTO.class);

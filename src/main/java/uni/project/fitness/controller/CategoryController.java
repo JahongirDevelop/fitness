@@ -52,11 +52,6 @@ public class CategoryController {
         categoryService.deleteCategory(id);
         return ResponseEntity.noContent().build();
     }
-
-    @GetMapping("/get-all-categories-for-user/{userId}")
-    public ResponseEntity<List<CategoryResponseDTOForUser>> getAllCoursesForUser(@PathVariable UUID userId) {
-        return ResponseEntity.ok(categoryService.getAllCategoriesForUser(userId));
-    }
     @GetMapping("/top")
     public List<TopCategoryResponseDTO> getTopLevelCategories() {
         return categoryService.getTopLevelCategories();
@@ -67,7 +62,6 @@ public class CategoryController {
         return categoryService.getSubcategories(topCategoryId, UUID.fromString(principal.getName()));
     }
 
-    // Endpoint to fetch courses of a selected subcategory
     @GetMapping("/subcategories/{subcategoryId}/courses")
     public List<CourseResponseDTO> getCoursesForSubcategory(@PathVariable UUID subcategoryId) {
         return categoryService.getCoursesForSubcategory(subcategoryId);
