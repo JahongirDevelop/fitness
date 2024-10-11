@@ -143,7 +143,9 @@ public class TrainingServiceImpl implements TrainingService {
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new DataNotFoundException("User not found!"));
         List<Training> trainingList = trainingRepository.findByTeacher(teacher);
-        boolean isAvailable = (user.getSubscription().getPeriod()!=SubscriptionPeriod.ONE_MONTH_BASIC)&&(user.getSubscription().getPeriod()!=null);
+        boolean isAvailable = user.getSubscription() != null &&
+                user.getSubscription().getPeriod() != SubscriptionPeriod.ONE_MONTH_BASIC;
+
         List<TrainingForTeacherResponseDTO> teacherResponseDTOList = new ArrayList<>();
         trainingList.forEach(training ->{
             teacherResponseDTOList.add(converter.convertToTrainingForTeacherResponseDTO(training,isAvailable));

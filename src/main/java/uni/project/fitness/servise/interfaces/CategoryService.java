@@ -11,7 +11,6 @@ public interface CategoryService {
     SubCategoryResponseDTO createSubCategory(SubCategoryRequestDTO requestDTO);
     SubCategoryResponseDTO updateSubCategory(UUID id, SubCategoryRequestDTO requestDTO);
     void deleteCategory(UUID id);
-    List<CategoryResponseDTOForUser> getAllCategoriesForUser(UUID userId);
     List<TopCategoryResponseDTO> getTopLevelCategories();
 
     List<SubCategoryResponseDTO> getSubcategories(UUID topCategoryId, UUID userId);

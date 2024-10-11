@@ -9,18 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Component
 public class MyConverter {
-        public CategoryResponseDTO convertToResponseDTO(Category category) {
 
-            List<CourseResponseDTO> courseResponseDTOs = category.getCourses().stream()
-                    .map(this::convertToResponseDTO)
-                    .collect(Collectors.toList());
-
-            return CategoryResponseDTO.builder()
-                    .id(category.getId())
-                    .name(category.getName())
-                    .courses(courseResponseDTOs)
-                    .build();
-        }
 
         public CourseResponseDTO convertToResponseDTO(Course course) {
             return CourseResponseDTO.builder()
@@ -31,7 +20,7 @@ public class MyConverter {
                     .image(course.getImage())
                     .trailerVideo(course.getTrailerVideo())
                     .whatYouWillGet(course.getWhatYouWillGet().stream()
-                            .map(IconDescription::getIconObject)  // Convert enums to icon objects
+                            .map(IconDescription::getIconObject)
                             .collect(Collectors.toList()))
                     .whatToExpects(course.getWhatToExpects())
                     .purpose(course.getPurpose())
@@ -157,7 +146,6 @@ public class MyConverter {
                     .purpose(course.getPurpose())
                     .results(course.getResults())
                     .category(convertToCategoryDTO(course.getCategory()))
-//                    .isAccessible(user.hasActiveSubscriptionForCourse(course))
                     .build();
         }
 
@@ -206,10 +194,9 @@ public class MyConverter {
         responseDTO.setId(topCategory.getId());
         responseDTO.setName(topCategory.getName());
 
-        // Map subcategories if the top category has subcategories associated with it
         if (topCategory.getSubcategories() != null && !topCategory.getSubcategories().isEmpty()) {
             List<SubCategoryResponseDTO> subCategoryDTOs = topCategory.getSubcategories().stream()
-                    .map(subCategory -> convertToSubCategoryResponseDTO(subCategory, false))  // Pass the boolean value
+                    .map(subCategory -> convertToSubCategoryResponseDTO(subCategory, false))
                     .collect(Collectors.toList());
             responseDTO.setSubcategories(subCategoryDTOs);
         }
@@ -226,13 +213,12 @@ public class MyConverter {
         responseDTO.setId(subCategory.getId());
         responseDTO.setIsAvailable(isAvailable);
         responseDTO.setName(subCategory.getName());
-        responseDTO.setImage(subCategory.getImage()); // Assuming subcategories have an image field
+        responseDTO.setImage(subCategory.getImage());
         responseDTO.setParentCategoryId(subCategory.getParentCategory().getId());
 
-        // Map courses if the subcategory has courses associated with it
         if (subCategory.getCourses() != null && !subCategory.getCourses().isEmpty()) {
             List<CourseResponseDTO> courseDTOs = subCategory.getCourses().stream()
-                    .map(this::convertToResponseDTO) // Convert each course to CourseResponseDTO
+                    .map(this::convertToResponseDTO)
                     .collect(Collectors.toList());
             responseDTO.setCourses(courseDTOs);
         }

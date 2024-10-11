@@ -83,16 +83,7 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteCategory(UUID id) {
         categoryRepository.deleteById(id);
     }
-    @Override
-    public List<CategoryResponseDTOForUser> getAllCategoriesForUser(UUID userId) {
-        UserEntity user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        List<Category> categories = categoryRepository.findAll();
-        return categories.stream()
-                .map(category -> converter.convertToResponseDTOForUser(category, user))
-                .collect(Collectors.toList());
-    }
-    // Fetch all top-level categories
+
     @Override
     public List<TopCategoryResponseDTO> getTopLevelCategories() {
         List<Category> topLevelCategories = categoryRepository.findByParentCategoryIsNull();
