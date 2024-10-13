@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uni.project.fitness.dto.auth.PasswordResetDto;
 import uni.project.fitness.dto.auth.PasswordResetRequest;
-import uni.project.fitness.servise.PasswordResetService;
+import uni.project.fitness.servise.interfaces.PasswordResetService;
 @RestController
 @RequestMapping("/api/password-reset")
 @RequiredArgsConstructor
