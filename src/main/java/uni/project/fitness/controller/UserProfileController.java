@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.UserProfileRequest;
 import uni.project.fitness.dto.response.CompletedCourseDTO;
-import uni.project.fitness.servise.UserProfileService;
+import uni.project.fitness.servise.interfaces.UserProfileService;
 import uni.project.fitness.servise.interfaces.CompletedCourseService;
 import java.security.Principal;
 import java.util.List;
