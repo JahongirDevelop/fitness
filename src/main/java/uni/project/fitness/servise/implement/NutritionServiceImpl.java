@@ -13,6 +13,7 @@ import uni.project.fitness.repository.NutritionRepository;
 import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.servise.interfaces.NutritionService;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -27,12 +28,23 @@ public class NutritionServiceImpl implements NutritionService {
     private final UserRepository userRepository;
     @Override
     public NutritionResponseDTO createNutrition(NutritionRequestDTO requestDTO) {
+        List<String> allowedExtensions = Arrays.asList(".pdf", ".docx", ".xlsx", ".txt");
+
+        boolean isValidFormat = allowedExtensions.stream()
+                .anyMatch(extension -> requestDTO.getPdfLink().toLowerCase().endsWith(extension));
+
+        if (!isValidFormat) {
+            throw new DataNotFoundException("Invalid file format. Supported formats are: .pdf, .docx, .xlsx, .txt");
+        }
+
         Nutrition nutrition = modelMapper.map(requestDTO, Nutrition.class);
         Nutrition savedNutrition = nutritionRepository.save(nutrition);
         NutritionResponseDTO responseDTO = modelMapper.map(savedNutrition, NutritionResponseDTO.class);
         responseDTO.setId(savedNutrition.getId());
+
         return responseDTO;
     }
+
     @Override
     public NutritionResponseDTO getNutritionById(UUID id) {
         Nutrition nutrition = nutritionRepository.findById(id)
