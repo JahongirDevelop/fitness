@@ -16,7 +16,6 @@ public class CourseRequestDTO {
     private String description;
     private String image;
     private String trailerVideo;
-    private Double price;
     private List<IconDescription> whatYouWillGet; // Use IconDescription enum
     private List<String> whatToExpects;
     private String purpose;
