@@ -18,7 +18,6 @@ public class UserCourseResponseDTO  {
     private String description;
     private String image;
     private String trailerVideo;
-    private Double price;
     private List<TrainingDTO> trainings;
     private List<IconDescription> whatYouWillGet; // Use IconDescription enum
     private List<String> whatToExpects;
