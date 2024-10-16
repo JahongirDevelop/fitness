@@ -85,6 +85,9 @@ public class MyConverter {
     }
 
         public TeacherResponseDTO convertToResponseDTO(Teacher teacher) {
+            if (teacher == null){
+                return null;
+            }
             return TeacherResponseDTO.builder()
                     .id(teacher.getId())
                     .name(teacher.getName())
@@ -117,10 +120,14 @@ public class MyConverter {
         }
 
         private CourseDTO convertToCourseDTO(Course course) {
-            return CourseDTO.builder()
-                    .id(course.getId())
-                    .title(course.getTitle())
-                    .build();
+            if (course == null){
+                return null;
+            } else {
+                return CourseDTO.builder()
+                        .id(course.getId())
+                        .title(course.getTitle())
+                        .build();
+            }
         }
 
         public CategoryDTO convertToCategoryDTO(Category category) {
