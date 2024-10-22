@@ -2,16 +2,13 @@ package uni.project.fitness.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import uni.project.fitness.entity.enums.UserRole;
-
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "users")
@@ -37,11 +34,6 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subscription_id", referencedColumnName = "id")
     private Subscription subscription;
-
-//    public boolean hasActiveSubscriptionForCourse(Course course) {
-//        return subscriptions.stream()
-//                .anyMatch(subscription -> subscription.getCourse().equals(course) && subscription.isActive());
-//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
