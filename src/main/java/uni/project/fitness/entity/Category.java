@@ -1,11 +1,8 @@
 package uni.project.fitness.entity;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.ArrayList;
 import java.util.List;
-
 @Entity(name = "category")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,7 +22,6 @@ public class Category extends BaseEntity {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Course> courses = new ArrayList<>();
 
-    // Image field for SubCategories
     private String image;
 
 
