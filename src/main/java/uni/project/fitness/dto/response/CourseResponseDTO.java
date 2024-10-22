@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uni.project.fitness.entity.icons.IconDescription;
+import uni.project.fitness.entity.enums.IconDescription;
 
 import java.util.List;
 import java.util.UUID;

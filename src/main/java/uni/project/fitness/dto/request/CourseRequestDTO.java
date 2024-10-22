@@ -1,7 +1,7 @@
 package uni.project.fitness.dto.request;
 
 import lombok.*;
-import uni.project.fitness.entity.icons.IconDescription;
+import uni.project.fitness.entity.enums.IconDescription;
 
 import java.util.List;
 import java.util.UUID;
