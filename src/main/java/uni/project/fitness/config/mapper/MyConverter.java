@@ -3,7 +3,7 @@ import org.springframework.stereotype.Component;
 import uni.project.fitness.dto.response.*;
 import uni.project.fitness.entity.*;
 import uni.project.fitness.servise.interfaces.CourseService;
-import uni.project.fitness.entity.icons.IconDescription;
+import uni.project.fitness.entity.enums.IconDescription;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
