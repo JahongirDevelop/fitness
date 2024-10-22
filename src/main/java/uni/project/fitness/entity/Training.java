@@ -1,6 +1,5 @@
 package uni.project.fitness.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
