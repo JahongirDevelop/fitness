@@ -1,7 +1,6 @@
-package uni.project.fitness.entity.icons;
+package uni.project.fitness.entity.enums;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -36,7 +35,6 @@ public enum IconDescription {
     }
 
     public record IconObject(String icon, String description) {
-        // Constructor for record class
         public IconObject(String icon, String description) {
             this.icon = icon;
             this.description = description;
