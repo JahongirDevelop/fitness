@@ -19,7 +19,7 @@ public class Course extends BaseEntity {
     private String description;
     private String image;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Training> trainings;
 
