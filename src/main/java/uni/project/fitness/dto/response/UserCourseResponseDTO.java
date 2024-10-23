@@ -19,11 +19,11 @@ public class UserCourseResponseDTO  {
     private String image;
     private String trailerVideo;
     private List<TrainingDTO> trainings;
-    private List<IconDescription> whatYouWillGet; // Use IconDescription enum
+    private List<IconDescription> whatYouWillGet;
     private List<String> whatToExpects;
     private String purpose;
     private List<String> results;
     private CategoryDTO category;
-    private Boolean isAccessible; // True if the user has an active subscription
+    private Boolean isAccessible;
 
 }
