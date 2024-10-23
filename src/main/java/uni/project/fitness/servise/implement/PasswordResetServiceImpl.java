@@ -10,7 +10,6 @@ import uni.project.fitness.repository.PasswordResetTokenRepository;
 import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.servise.MailSenderService;
 import uni.project.fitness.servise.interfaces.PasswordResetService;
-
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -52,7 +51,7 @@ public class PasswordResetServiceImpl implements PasswordResetService {
                 .orElseThrow(() -> new DataNotFoundException("Invalid code or user"));
 
         if (passwordResetToken.getExpiryDate().isBefore(LocalDateTime.now())) {
-            throw new DataNotFoundException("Token has expired");
+            throw new DataNotFoundException("Code has expired");
         }
 
         UserEntity user = passwordResetToken.getUser();
