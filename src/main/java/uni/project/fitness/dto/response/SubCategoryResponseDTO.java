@@ -12,6 +12,6 @@ public class SubCategoryResponseDTO {
     private String image;
     private UUID parentCategoryId;
     private Boolean isAvailable;
-    private List<CourseResponseDTO> courses;  // Include course details
+    private List<CourseResponseDTO> courses;
 }
 
