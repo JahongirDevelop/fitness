@@ -23,7 +23,7 @@ public class CourseResponseDTO {
     private String image;
     private String trailerVideo;
     private List<TrainingDTO> trainings;
-    private List<IconDescription.IconObject> whatYouWillGet;  // Changed to match the expected structure
+    private List<IconDescription.IconObject> whatYouWillGet;
     private List<String> whatToExpects;
     private String purpose;
     private List<String> results;
