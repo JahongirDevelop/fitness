@@ -15,5 +15,4 @@ public class TeacherRequestDTO {
     private String image;
     private String workType;
     private String about;
-//    private List<UUID> trainingIds; // List of Training IDs
 }
