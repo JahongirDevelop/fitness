@@ -29,8 +29,6 @@ public class AuthServiceImpl implements AuthService {
     private final ModelMapper modelMapper;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
-
-    private AuthenticationManager authenticationManager;
     @Override
     public ErrorDTO addUser(SignUp signUp) {
         if (userRepository.existsByEmail(signUp.getEmail())) {
@@ -43,14 +41,6 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(user);
 
         return new ErrorDTO("User successfully registered", 200);
-
-//        return UserProfileResponse.builder()
-//                .id(user.getId())
-//                .email(user.getEmail())
-//                .name(user.getName())
-//                .password(user.getPassword())
-//                .phoneNumber(user.getPhoneNumber())
-//                .build();
     }
     @Override
     public JwtResponse signIn(AuthDto dto) {
