@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import uni.project.fitness.entity.UserEntity;
-
-
 import java.util.Date;
 import java.util.Map;
 
