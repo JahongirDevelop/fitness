@@ -9,9 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Component
 public class MyConverter {
-
-
-        public CourseResponseDTO convertToResponseDTO(Course course) {
+    public CourseResponseDTO convertToResponseDTO(Course course) {
             return CourseResponseDTO.builder()
                     .id(course.getId())
                     .title(course.getTitle())
@@ -32,9 +30,8 @@ public class MyConverter {
                                     .collect(Collectors.toList())
                             : new ArrayList<>())
                     .build();
-        }
-
-        public TrainingResponseDTO convertToResponseDTO(Training training) {
+    }
+    public TrainingResponseDTO convertToResponseDTO(Training training) {
             return TrainingResponseDTO.builder()
                     .id(training.getId())
                     .title(training.getTitle())
@@ -49,9 +46,8 @@ public class MyConverter {
                     .musclesInvolved(training.getMusclesInvolved())
                     .results(training.getResults())
                     .build();
-        }
+    }
     public TrainingForCourseResponseDTO convertToTrainingForCourseResponseDTO(Training training) {
-
         return TrainingForCourseResponseDTO.builder()
                 .id(training.getId())
                 .title(training.getTitle())
@@ -67,7 +63,6 @@ public class MyConverter {
                 .build();
     }
     public TrainingForTeacherResponseDTO convertToTrainingForTeacherResponseDTO(Training training, boolean isAvailable) {
-
         return TrainingForTeacherResponseDTO.builder()
                 .id(training.getId())
                 .title(training.getTitle())
@@ -84,7 +79,7 @@ public class MyConverter {
                 .build();
     }
 
-        public TeacherResponseDTO convertToResponseDTO(Teacher teacher) {
+    public TeacherResponseDTO convertToResponseDTO(Teacher teacher) {
             if (teacher == null){
                 return null;
             }
@@ -95,31 +90,18 @@ public class MyConverter {
                     .workType(teacher.getWorkType())
                     .about(teacher.getAbout())
                     .build();
-        }
+    }
 
-        public CategoryResponseDTOForUser convertToResponseDTOForUser(Category category, UserEntity user) {
-
-            List<UserCourseResponseDTO> userCourseResponseDTOs = category.getCourses().stream()
-                    .map(course -> convertToUserCourseResponseDTO(course, user))
-                    .collect(Collectors.toList());
-
-            return CategoryResponseDTOForUser.builder()
-                    .id(category.getId())
-                    .name(category.getName())
-                    .courses(userCourseResponseDTOs)
-                    .build();
-        }
-
-        private TrainingDTO convertToTrainingDTO(Training training) {
+    private TrainingDTO convertToTrainingDTO(Training training) {
             return TrainingDTO.builder()
                     .id(training.getId())
                     .title(training.getTitle())
                     .description(training.getDescription())
                     .image(training.getImage())
                     .build();
-        }
+    }
 
-        private CourseDTO convertToCourseDTO(Course course) {
+    private CourseDTO convertToCourseDTO(Course course) {
             if (course == null){
                 return null;
             } else {
@@ -128,33 +110,14 @@ public class MyConverter {
                         .title(course.getTitle())
                         .build();
             }
-        }
+    }
 
-        public CategoryDTO convertToCategoryDTO(Category category) {
+    public CategoryDTO convertToCategoryDTO(Category category) {
             return CategoryDTO.builder()
                     .id(category.getId())
                     .name(category.getName())
                     .build();
-        }
-
-        private UserCourseResponseDTO convertToUserCourseResponseDTO(Course course, UserEntity user) {
-            return UserCourseResponseDTO.builder()
-                    .id(course.getId())
-                    .title(course.getTitle())
-                    .subTitle(course.getSubTitle())
-                    .description(course.getDescription())
-                    .image(course.getImage())
-                    .trailerVideo(course.getTrailerVideo())
-                    .trainings(course.getTrainings().stream()
-                            .map(this::convertToTrainingDTO)
-                            .collect(Collectors.toList()))
-                    .whatYouWillGet(course.getWhatYouWillGet())
-                    .whatToExpects(course.getWhatToExpects())
-                    .purpose(course.getPurpose())
-                    .results(course.getResults())
-                    .category(convertToCategoryDTO(course.getCategory()))
-                    .build();
-        }
+    }
 
     public CompletedCourseDTO convertToCompletedCourseDTO(CompletedCourse completedCourse, CourseService courseService) {
         CourseResponseDTO courseResponseDTO = convertToResponseDTO(completedCourse.getCourse());
@@ -207,7 +170,6 @@ public class MyConverter {
                     .collect(Collectors.toList());
             responseDTO.setSubcategories(subCategoryDTOs);
         }
-
         return responseDTO;
     }
 
@@ -215,7 +177,6 @@ public class MyConverter {
         if (subCategory == null) {
             return null;
         }
-
         SubCategoryResponseDTO responseDTO = new SubCategoryResponseDTO();
         responseDTO.setId(subCategory.getId());
         responseDTO.setIsAvailable(isAvailable);
@@ -232,7 +193,6 @@ public class MyConverter {
 
         return responseDTO;
     }
-
 
 }
 
