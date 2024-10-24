@@ -20,9 +20,6 @@ public class Teacher extends BaseEntity {
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Training> trainingList;
-    public boolean isAccessibleForUser(Subscription subscription) {
-        return subscription.isTeacherTrainingUnlocked();
-    }
 }
 
 
