@@ -35,30 +35,5 @@ public class Subscription extends BaseEntity {
         this.endDate = this.endDate.plus(additionalPeriod.getDuration());
     }
 
-    // Determine which content is unlocked based on subscription period
-    public boolean isBasicAccess() {
-        return period == SubscriptionPeriod.ONE_MONTH_BASIC;
-    }
-
-    public boolean isFullAccess() {
-        return period == SubscriptionPeriod.ONE_MONTHS_FULL || period == SubscriptionPeriod.ONE_YEAR_FULL;
-    }
-
-    public boolean isYearlyFullAccess() {
-        return period == SubscriptionPeriod.ONE_YEAR_FULL;
-    }
-
-    // Method to check if a specific type of content is unlocked
-    public boolean isTrainingUnlocked() {
-        return isBasicAccess() || isFullAccess();
-    }
-
-    public boolean isNutritionUnlocked() {
-        return isFullAccess() || isYearlyFullAccess();
-    }
-
-    public boolean isTeacherTrainingUnlocked() {
-        return isFullAccess() || isYearlyFullAccess();
-    }
 }
 
