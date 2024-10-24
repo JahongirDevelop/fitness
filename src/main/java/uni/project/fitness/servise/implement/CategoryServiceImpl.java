@@ -6,16 +6,13 @@ import uni.project.fitness.dto.request.SubCategoryRequestDTO;
 import uni.project.fitness.dto.request.TopCategoryRequestDTO;
 import uni.project.fitness.dto.response.*;
 import uni.project.fitness.entity.*;
-import uni.project.fitness.entity.enums.SubscriptionPeriod;
 import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.config.mapper.MyConverter;
 import uni.project.fitness.repository.CategoryRepository;
 import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.servise.interfaces.CategoryService;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
