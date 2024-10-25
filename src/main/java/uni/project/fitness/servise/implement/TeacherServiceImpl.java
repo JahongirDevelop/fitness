@@ -9,7 +9,6 @@ import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.config.mapper.MyConverter;
 import uni.project.fitness.repository.TeacherRepository;
 import uni.project.fitness.servise.interfaces.TeacherService;
-
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
