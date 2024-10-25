@@ -9,7 +9,6 @@ import uni.project.fitness.entity.UserEntity;
 import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.servise.interfaces.UserProfileService;
-
 import java.util.UUID;
 @Service
 @RequiredArgsConstructor
@@ -43,12 +42,6 @@ public class UserProfileServiceImpl implements UserProfileService {
     public UserProfileResponse updateUserProfile(UUID userId, UserProfileRequest profileRequest) {
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new DataNotFoundException("User not found"));
-
-        // Check if the current password matches the user's password
-        //        if (!passwordEncoder.matches(profileRequest.getCurrentPassword(), user.getPassword())) {
-//            throw new IllegalArgumentException("Invalid current password");
-//        }
-
         if (profileRequest.getName() != null) {
             user.setName(profileRequest.getName());
         }
