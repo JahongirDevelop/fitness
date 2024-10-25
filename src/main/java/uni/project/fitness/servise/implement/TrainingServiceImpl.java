@@ -17,10 +17,8 @@ import uni.project.fitness.repository.TeacherRepository;
 import uni.project.fitness.repository.TrainingRepository;
 import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.servise.interfaces.TrainingService;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -29,7 +27,7 @@ import java.util.stream.Collectors;
 public class TrainingServiceImpl implements TrainingService {
     private final TrainingRepository trainingRepository;
     private final CourseRepository courseRepository;
-    private final TeacherRepository teacherRepository; // Make sure to inject this
+    private final TeacherRepository teacherRepository;
     private final MyConverter converter;
     private final UserRepository userRepository;
 
