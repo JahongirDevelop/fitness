@@ -4,14 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uni.project.fitness.config.mapper.MyConverter;
 import uni.project.fitness.dto.request.NewsRequestDTO;
-import uni.project.fitness.dto.response.CategoryDTO;
 import uni.project.fitness.dto.response.NewsResponseDTO;
 import uni.project.fitness.entity.News;
 import uni.project.fitness.exception.*;
-import uni.project.fitness.repository.CategoryRepository;
 import uni.project.fitness.repository.NewsRepository;
 import uni.project.fitness.servise.interfaces.NewsService;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -47,7 +44,6 @@ public class NewsServiceImpl implements NewsService {
                     news.setTitle(updatedNews.getTitle());
                     news.setSubTitle(updatedNews.getSubTitle());
                     news.setDescription(updatedNews.getDescription());
-//                    news.setCategory(updatedNews.getCategory()); // Ensure converter is correctly handled
                     news.setMedia(updatedNews.getMedia());
                     return newsRepository.save(news);
                 })
@@ -66,8 +62,6 @@ public class NewsServiceImpl implements NewsService {
                 .subTitle(dto.getSubTitle())
                 .description(dto.getDescription())
                 .media(dto.getMedia())
-//                .category(categoryRepository.findById(dto.getCategoryId())
-//                        .orElseThrow(() -> new DataNotFoundException("Category not found with id " + dto.getCategoryId())))
                 .build();
     }
 }
