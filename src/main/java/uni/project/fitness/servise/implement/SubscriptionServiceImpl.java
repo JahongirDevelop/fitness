@@ -7,7 +7,6 @@ import uni.project.fitness.entity.Subscription;
 import uni.project.fitness.entity.UserEntity;
 import uni.project.fitness.entity.enums.SubscriptionPeriod;
 import uni.project.fitness.entity.enums.SubscriptionStatus;
-import uni.project.fitness.repository.CategoryRepository;
 import uni.project.fitness.repository.SubscriptionRepository;
 import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.servise.interfaces.SubscriptionService;
@@ -20,7 +19,6 @@ import java.util.UUID;
 public class SubscriptionServiceImpl implements SubscriptionService {
     private final SubscriptionRepository subscriptionRepository;
     private final UserRepository userRepository;
-    private final CategoryRepository courseRepository;
     @Override
     public SubscriptionDTO createSubscription(UUID userId, SubscriptionPeriod period) {
         UserEntity user = userRepository.findById(userId)
