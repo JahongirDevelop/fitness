@@ -5,7 +5,6 @@ import io.jsonwebtoken.Jws;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uni.project.fitness.config.security.JwtResponse;
@@ -19,7 +18,6 @@ import uni.project.fitness.exception.ErrorDTO;
 import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.entity.enums.UserRole;
 import uni.project.fitness.servise.interfaces.AuthService;
-
 import java.util.UUID;
 
 @Service
