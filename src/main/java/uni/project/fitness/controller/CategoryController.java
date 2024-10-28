@@ -18,28 +18,21 @@ import java.util.UUID;
 public class CategoryController {
     private final CategoryService categoryService;
 
-    // Create Top Category
     @PostMapping("/create-topCategory")
     public ResponseEntity<TopCategoryResponseDTO> createTopCategory(@RequestBody TopCategoryRequestDTO requestDTO) {
         TopCategoryResponseDTO response = categoryService.createTopCategory(requestDTO);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-
-    // Update Top Category
     @PutMapping("/update-topCategory/{id}")
     public ResponseEntity<TopCategoryResponseDTO> updateTopCategory(@PathVariable UUID id, @RequestBody TopCategoryRequestDTO requestDTO) {
         TopCategoryResponseDTO response = categoryService.updateTopCategory(id, requestDTO);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-    // Create Sub Category
     @PostMapping("/create-subCategory")
     public ResponseEntity<SubCategoryResponseDTO> createSubCategory(@RequestBody SubCategoryRequestDTO requestDTO) {
         SubCategoryResponseDTO response = categoryService.createSubCategory(requestDTO);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-
-    // Update Sub Category
     @PutMapping("/update-subCategory/{id}")
     public ResponseEntity<SubCategoryResponseDTO> updateSubCategory(@PathVariable UUID id, @RequestBody SubCategoryRequestDTO requestDTO) {
         SubCategoryResponseDTO response = categoryService.updateSubCategory(id, requestDTO);
