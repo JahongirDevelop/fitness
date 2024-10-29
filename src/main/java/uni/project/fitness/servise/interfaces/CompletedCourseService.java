@@ -3,7 +3,6 @@ package uni.project.fitness.servise.interfaces;
 import uni.project.fitness.dto.response.*;
 import java.util.List;
 import java.util.UUID;
-
 public interface CompletedCourseService {
     List<CompletedCourseDTO> getCompletedCoursesByUserId(UUID userId);
     CompletedCourseResponseDTO createCompletedCourse(CompletedCourseRequestDTO requestDTO);
