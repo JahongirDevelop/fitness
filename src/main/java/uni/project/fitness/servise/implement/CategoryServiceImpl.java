@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
@@ -25,7 +24,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public TopCategoryResponseDTO createTopCategory(TopCategoryRequestDTO requestDTO) {
-        // Create top-level category
         Category category = Category.builder()
                 .name(requestDTO.getName())
                 .parentCategory(null) // Top-level categories have no parent.
