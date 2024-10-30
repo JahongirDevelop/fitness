@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import uni.project.fitness.entity.enums.IconDescription;
 import java.util.List;
-
 @Entity(name = "course")
 @AllArgsConstructor
 @NoArgsConstructor
