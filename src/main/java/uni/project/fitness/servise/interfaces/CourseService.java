@@ -4,7 +4,6 @@ import uni.project.fitness.dto.request.*;
 import uni.project.fitness.dto.response.*;
 import java.util.List;
 import java.util.UUID;
-
 public interface CourseService {
     CourseResponseDTO createCourse(CourseRequestDTO requestDTO);
     CourseResponseDTO updateCourse(UUID id, CourseRequestDTO requestDTO);
