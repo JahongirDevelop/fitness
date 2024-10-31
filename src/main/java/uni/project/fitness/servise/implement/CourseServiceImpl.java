@@ -11,7 +11,6 @@ import uni.project.fitness.repository.*;
 import uni.project.fitness.servise.interfaces.CourseService;
 import java.util.*;
 import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 public class CourseServiceImpl implements CourseService {
