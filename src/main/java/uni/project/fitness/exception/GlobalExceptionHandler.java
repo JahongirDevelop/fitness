@@ -6,8 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
@@ -36,7 +34,6 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDTO(errors.toString(), 400));
     }
 
-    // Exception handler for DataAlreadyExistsException
     @ExceptionHandler(DataAlreadyExistsException.class)
     public ResponseEntity<ErrorDTO> dataAlreadyExistsExceptionHandler(DataAlreadyExistsException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorDTO(e.getMessage(), 409));
