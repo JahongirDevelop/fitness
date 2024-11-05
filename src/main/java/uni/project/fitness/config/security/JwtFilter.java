@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
-
 @AllArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
