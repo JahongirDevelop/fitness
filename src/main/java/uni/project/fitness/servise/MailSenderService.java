@@ -7,8 +7,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import uni.project.fitness.exception.SendVerificationCodeException;
 import java.util.Random;
-
-
 @Service
 @RequiredArgsConstructor
 public class MailSenderService {
