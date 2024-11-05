@@ -4,7 +4,6 @@ import lombok.Getter;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 @Getter
 public enum IconDescription {
     BODY("https://video2.topstretching-app.digitalfalcon.ae/assets/icons/body.png", "Flat belly, strong abs, tight buttocks"),
