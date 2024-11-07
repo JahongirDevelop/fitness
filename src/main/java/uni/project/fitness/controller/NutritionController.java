@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import uni.project.fitness.dto.request.NutritionRequestDTO;
 import uni.project.fitness.dto.response.NutritionResponseDTO;
 import uni.project.fitness.servise.interfaces.NutritionService;
-
 import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
