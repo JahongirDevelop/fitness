@@ -12,7 +12,6 @@ import uni.project.fitness.servise.MailSenderService;
 import uni.project.fitness.servise.interfaces.PasswordResetService;
 import java.time.LocalDateTime;
 import java.util.Random;
-
 @Service
 @RequiredArgsConstructor
 public class PasswordResetServiceImpl implements PasswordResetService {
