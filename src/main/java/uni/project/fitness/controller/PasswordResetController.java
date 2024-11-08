@@ -12,7 +12,6 @@ import uni.project.fitness.servise.interfaces.PasswordResetService;
 @RequestMapping("/api/password-reset")
 @RequiredArgsConstructor
 public class PasswordResetController {
-
     private final PasswordResetService passwordResetService;
     @PostMapping("/request")
     public ResponseEntity<String> requestPasswordReset(@RequestBody PasswordResetRequest request) {
