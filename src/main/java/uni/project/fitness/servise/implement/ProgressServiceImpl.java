@@ -11,11 +11,9 @@ import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.repository.ProgressRepository;
 import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.servise.interfaces.ProgressService;
-
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 public class ProgressServiceImpl implements ProgressService {
