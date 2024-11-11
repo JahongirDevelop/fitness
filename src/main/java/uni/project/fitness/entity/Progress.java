@@ -6,7 +6,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 import java.util.List;
-
 @Entity(name = "progress")
 @AllArgsConstructor
 @NoArgsConstructor
