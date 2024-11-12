@@ -5,7 +5,6 @@ import lombok.*;
 import uni.project.fitness.entity.enums.SubscriptionPeriod;
 import uni.project.fitness.entity.enums.SubscriptionStatus;
 import java.time.LocalDate;
-
 @Entity(name = "subscription")
 @AllArgsConstructor
 @NoArgsConstructor
