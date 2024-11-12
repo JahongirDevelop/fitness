@@ -1,9 +1,7 @@
 package uni.project.fitness.entity.enums;
 
 import lombok.Getter;
-
 import java.time.Duration;
-
 @Getter
 public enum SubscriptionPeriod {
     ONE_MONTH_BASIC(Duration.ofDays(30)),
