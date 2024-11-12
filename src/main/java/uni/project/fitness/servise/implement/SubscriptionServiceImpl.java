@@ -10,10 +10,8 @@ import uni.project.fitness.entity.enums.SubscriptionStatus;
 import uni.project.fitness.repository.SubscriptionRepository;
 import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.servise.interfaces.SubscriptionService;
-
 import java.time.LocalDate;
 import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
 public class SubscriptionServiceImpl implements SubscriptionService {
@@ -46,7 +44,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
                 .status(subscription.getStatus())
                 .build();
     }
-
 
     @Override
     public void extendSubscription(UUID userId, UUID courseId, SubscriptionPeriod additionalPeriod) {
