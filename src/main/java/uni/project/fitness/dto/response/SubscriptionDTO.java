@@ -3,10 +3,8 @@ package uni.project.fitness.dto.response;
 import lombok.*;
 import uni.project.fitness.entity.enums.SubscriptionPeriod;
 import uni.project.fitness.entity.enums.SubscriptionStatus;
-
 import java.time.LocalDate;
 import java.util.UUID;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
