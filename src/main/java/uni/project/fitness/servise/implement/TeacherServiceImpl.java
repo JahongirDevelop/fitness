@@ -12,7 +12,6 @@ import uni.project.fitness.servise.interfaces.TeacherService;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 public class TeacherServiceImpl implements TeacherService {
