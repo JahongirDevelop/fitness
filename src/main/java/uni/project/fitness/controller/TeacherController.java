@@ -32,7 +32,6 @@ public class TeacherController {
     public ResponseEntity<TeacherResponseDTO> getTeacherById(@PathVariable UUID id) {
         return ResponseEntity.ok(teacherService.getTeacherById(id));
     }
-
     @GetMapping
     public ResponseEntity<List<TeacherResponseDTO>> getAllTeachers() {
         return ResponseEntity.ok(teacherService.getAllTeachers());
