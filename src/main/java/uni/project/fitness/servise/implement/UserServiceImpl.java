@@ -10,7 +10,6 @@ import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.repository.UserRepository;
 import uni.project.fitness.servise.interfaces.UserService;
 import java.util.*;
-
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
