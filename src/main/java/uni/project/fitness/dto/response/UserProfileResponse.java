@@ -1,11 +1,8 @@
 package uni.project.fitness.dto.response;
 
 import lombok.*;
-import uni.project.fitness.entity.enums.UserRole;
-
 import java.time.LocalDate;
 import java.util.UUID;
-
 @Getter
 @Setter
 @AllArgsConstructor
