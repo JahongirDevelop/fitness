@@ -20,12 +20,10 @@ public class UserController {
     public ResponseEntity<Optional<UserResponse>> getUserById(@PathVariable UUID id) {
          return ResponseEntity.ok(userService.findById(id));
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable UUID id) {
         return ResponseEntity.status(200).body(userService.deleteUser(id));
     }
-
     @PreAuthorize("hasRole('SUPER_ADMIN')")
     @PutMapping("/update-user-role/{userId}/role")
     public ResponseEntity<UserResponse> updateUserRole(
