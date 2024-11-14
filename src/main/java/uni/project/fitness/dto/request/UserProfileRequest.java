@@ -2,7 +2,6 @@ package uni.project.fitness.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-
 import java.time.LocalDate;
 
 @Getter
