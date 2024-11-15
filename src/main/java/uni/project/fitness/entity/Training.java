@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
-
 @Entity(name = "training")
 @AllArgsConstructor
 @NoArgsConstructor
