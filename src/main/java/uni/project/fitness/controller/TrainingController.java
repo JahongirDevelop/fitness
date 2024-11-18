@@ -8,7 +8,6 @@ import uni.project.fitness.dto.response.TrainingForCourseResponseDTO;
 import uni.project.fitness.dto.response.TrainingForTeacherResponseDTO;
 import uni.project.fitness.dto.response.TrainingResponseDTO;
 import uni.project.fitness.servise.interfaces.TrainingService;
-
 import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
