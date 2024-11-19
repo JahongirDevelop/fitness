@@ -1,4 +1,4 @@
-package uni.project.fitness.dto.error;
+package uni.project.fitness.exception.error;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
