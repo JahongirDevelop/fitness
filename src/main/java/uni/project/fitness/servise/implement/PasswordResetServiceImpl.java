@@ -8,7 +8,7 @@ import uni.project.fitness.entity.UserEntity;
 import uni.project.fitness.exception.DataNotFoundException;
 import uni.project.fitness.repository.PasswordResetTokenRepository;
 import uni.project.fitness.repository.UserRepository;
-import uni.project.fitness.servise.MailSenderService;
+import uni.project.fitness.servise.interfaces.MailSenderService;
 import uni.project.fitness.servise.interfaces.PasswordResetService;
 import java.time.LocalDateTime;
 import java.util.Random;
