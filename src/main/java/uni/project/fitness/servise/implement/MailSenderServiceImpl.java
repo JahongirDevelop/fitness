@@ -1,4 +1,4 @@
-package uni.project.fitness.servise;
+package uni.project.fitness.servise.implement;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -6,17 +6,19 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import uni.project.fitness.exception.SendVerificationCodeException;
+import uni.project.fitness.servise.interfaces.MailSenderService;
+
 import java.util.Random;
 @Service
 @RequiredArgsConstructor
-public class MailSenderService {
+public class MailSenderServiceImpl implements MailSenderService {
 
     private final JavaMailSender mailSender;
 
     @Value("${spring.mail.username}")
     private String sender;
     public static final Random random = new Random();
-
+    @Override
     public String sendVerificationCode(String email) {
 
         try {
@@ -33,7 +35,7 @@ public class MailSenderService {
         }
 
     }
-
+    @Override
     public void sendPasswordResetEmail(String email, String token) {
         try {
 //            String resetUrl = "Your reset password: " + token;
