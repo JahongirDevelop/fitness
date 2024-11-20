@@ -1,7 +1,6 @@
 package uni.project.fitness.dto.request;
 
 import lombok.Data;
-
 import java.util.UUID;
 
 @Data
